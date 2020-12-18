@@ -16,16 +16,17 @@
                 <fieldset>
                     <h2>Please Sign In</h2>
                     <hr class="colorgraph">
-                    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <p style="color: red" th:text="${loginMsg}" th:if="${not #strings.isEmpty(loginMsg)}"></p>
+                    <p style="color: limegreen" th:text="${successMsg}" th:if="${not #strings.isEmpty(successMsg)}"></p>
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-lg" placeholder="User Name/Email Address">
+                        <label for="email"></label><input type="email" name="email" id="email" class="form-control input-lg" placeholder="User Name/Email Address">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
+                        <label for="password"></label><input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
                     </div>
                     <span class="button-checkbox">
 					<button type="button" class="btn" data-color="info">Remember Me</button>
-                    <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+                    <label for="remember_me"></label><input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
 					<a href="" class="btn btn-link pull-right">Forgot Password?</a>
 				</span>
                     <hr class="colorgraph">
@@ -34,7 +35,7 @@
                             <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <a href="" class="btn btn-lg btn-primary btn-block">Register</a>
+                            <a th:href="@{/register}" class="btn btn-lg btn-primary btn-block">Register</a>
                         </div>
                     </div>
                 </fieldset>
