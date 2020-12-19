@@ -11,12 +11,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class RegisterController {
     @RequestMapping("/user/register")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session){
-        if(StringUtils.isEmpty(email) || StringUtils.isEmpty(password) || StringUtils.isEmpty(confirmPassword)){
+    public String login(@RequestParam("nickName") String nickName, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session){
+        if(StringUtils.isEmpty(nickName) || StringUtils.isEmpty(email) || StringUtils.isEmpty(password) || StringUtils.isEmpty(confirmPassword)){
             //TODO: check whether this email has been used
 //            session.setAttribute("loginUser", email);
 //            add to database
-            model.addAttribute("registerMsg","Please enter your e-mail address and password!");
+            model.addAttribute("registerMsg","Please enter your nick name, e-mail address and password!");
             return "register";
         }
         if(!password.equals(confirmPassword)){
