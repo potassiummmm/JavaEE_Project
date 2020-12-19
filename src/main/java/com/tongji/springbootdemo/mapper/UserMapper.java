@@ -9,8 +9,8 @@ import java.util.List;
 @Repository
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM user")
+    @Select("SELECT * FROM users")
     List<User> findAll();
-    @Insert("INSERT INTO user VALUES(#{name},)")
-    int addUser(User user);
+    @Insert("INSERT INTO users(nickname,email,password) VALUES(#{nickname},#{email},#{password})")
+    int addUser(String nickname,String email,String password);
 }

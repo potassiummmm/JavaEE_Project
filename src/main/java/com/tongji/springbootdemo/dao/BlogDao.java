@@ -1,7 +1,6 @@
 package com.tongji.springbootdemo.dao;
 
 import com.tongji.springbootdemo.model.Blog;
-import com.tongji.springbootdemo.pojo.Department;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

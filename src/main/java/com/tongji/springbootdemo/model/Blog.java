@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Blog {
-    private Integer id;
+    private Integer blogId;
     private String title;
     private String content;
     private String author;
@@ -20,8 +20,8 @@ public class Blog {
     private Integer like;
     private Integer view;
 
-    public static void main(String[] args) {
-        Blog b = new Blog();
-        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
-    }
+//    public static void main(String[] args) {
+//        Blog b = new Blog();
+//        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
+//    }
 }
