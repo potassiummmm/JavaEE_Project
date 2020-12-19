@@ -2,17 +2,21 @@ package com.tongji.springbootdemo.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Calendar;
 import java.util.Date;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Blog {
     private Integer id;
     private String title;
     private String content;
-    private Date date;
+    private String author;
+    private Calendar date = Calendar.getInstance();
     private Integer like;
     private Integer view;
 
@@ -24,11 +28,18 @@ public class Blog {
         return content;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public Integer getId() {
         return id;
     }
+    public Calendar getDate() {
+        return date;
+    }
+
+    public static void main(String[] args) {
+        Blog b = new Blog();
+        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
+
+    }
+
+
 }

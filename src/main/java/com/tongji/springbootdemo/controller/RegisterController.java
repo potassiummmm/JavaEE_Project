@@ -24,6 +24,6 @@ public class RegisterController {
             return "register";
         }
         model.addAttribute("successMsg", "Register successfully! Please login!");
-        return "login2";
+        return "login";
     }
 }
