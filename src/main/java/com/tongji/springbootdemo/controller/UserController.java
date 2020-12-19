@@ -20,6 +20,6 @@ public class UserController {
     {
         List<User> users=userMapper.findAll();
         model.addAttribute("users",users);
-        return "userList";
+        return "login";
     }
 }
