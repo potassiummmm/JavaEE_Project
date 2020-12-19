@@ -47,4 +47,7 @@ public class Blog {
 
     }
 
+    public String getAuthor() {
+        return author;
+    }
 }

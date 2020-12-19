@@ -11,9 +11,9 @@ public class BlogDao {
 
     static{
         blogs=new HashMap<Integer, Blog>();
-        blogs.put(101,new Blog(1,"haha","hahahaha","a", Calendar.getInstance(),0,0));
-        blogs.put(102,new Blog(2,"hehe","hehehehe","b", Calendar.getInstance(),0,0));
-        blogs.put(103,new Blog(3,"pa","kuaipa","c", Calendar.getInstance(),0,0));
+        blogs.put(101,new Blog(101,"haha","hahahaha","a", Calendar.getInstance(),0,0));
+        blogs.put(102,new Blog(102,"hehe","hehehehe","b", Calendar.getInstance(),0,0));
+        blogs.put(103,new Blog(103,"pa","kuaipa","c", Calendar.getInstance(),0,0));
     }
 
     public Collection<Blog> getBlogs(){

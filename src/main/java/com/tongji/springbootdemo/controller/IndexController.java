@@ -21,7 +21,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model){
         Collection<Blog> blogs = blogDao.getBlogs();
-        model.addAttribute("blogs",blogs);
+        model.addAttribute("blogs", blogs);
 //        return new ModelAndView("index", "blogs", blogs);
         return "index";
     }

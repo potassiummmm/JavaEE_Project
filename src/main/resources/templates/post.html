@@ -59,7 +59,10 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1 th:text="${blog.getTitle()}">Haha</h1>
-            <span class="meta" th:text="${blog.getDate()}">on August 24, 2019</span>
+            <h3 th:text="${blog.getAuthor()}"></h3>
+            <span th:text="${blog.getDate().get(1)}+' /'" class="font-weight-light"></span>
+            <span th:text="${blog.getDate().get(2)+1}+' /'" class="font-weight-light"></span>
+            <span th:text="${blog.getDate().get(5)}" class="font-weight-light"></span>
           </div>
         </div>
       </div>
@@ -79,17 +82,35 @@
 
   <hr>
 
-  <div class="container">
-    <form id="messageForm" th:action="@{/(post)}" th:object="${blog}" action="#" method="post">
+<!--  TODO : Need to be beautified-->
 
-      <div class="form-group">
-        <label for="comment">Leave Your Comment:</label>
-        <textarea type="text" th:field="*{comment}" > </textarea>
+  <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%">
+    <input type="hidden" name="blog.id" th:value="${blog.id}">
+    <input type="hidden" name="parentComent.id" value="-1">
+    <div class="textarea">
+      <textarea name="content" placeholder="Leave a comment"></textarea>
+    </div>
+    <div class="form-group">
+      <div class="input">
+        <button id="commentpost-btn" type="button" class="btn-primary"><i class="edit icon"></i>Send</button>
       </div>
+    </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
   </div>
+
+
+<!--  TODO : show commets-->
+<!--  <div class="container">-->
+<!--      <form id="messageForm" th:action="@{/(post)}" th:object="${blog}" action="#" method="post">-->
+
+<!--      <div class="form-group">-->
+<!--        <label for="comment">Leave Your Comment:</label>-->
+<!--        <textarea type="text" th:field="*{comment}" > </textarea>-->
+<!--      </div>-->
+
+<!--      <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--    </form>-->
+<!--  </div>-->
 
   <!-- Footer -->
   <footer>
