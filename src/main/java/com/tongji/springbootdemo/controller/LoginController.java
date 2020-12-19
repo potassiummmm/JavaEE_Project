@@ -18,7 +18,7 @@ public class LoginController {
             session.setAttribute("loginUser", email);
             return "index";
         }
-        model.addAttribute("loginMsg","Wrong username/email or password!");
+        model.addAttribute("loginMsg","Wrong email address or password!");
         return "login2";
     }
 }

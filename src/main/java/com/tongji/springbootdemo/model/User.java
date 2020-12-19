@@ -1,8 +1,5 @@
 package com.tongji.springbootdemo.model;
 
-import org.springframework.context.annotation.Bean;
-
-
 public class User {
     private Integer userId;
     private String nickname;

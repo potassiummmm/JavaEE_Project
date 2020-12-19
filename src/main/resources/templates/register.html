@@ -19,7 +19,10 @@
                     <!--/*@thymesVar id="registerMsg" type=""*/-->
                     <p style="color: red" th:text="${registerMsg}" th:if="${not #strings.isEmpty(registerMsg)}"></p>
                     <div class="form-group">
-                        <label for="email"></label><input type="email" name="email" id="email" class="form-control input-lg" placeholder="User Name/Email Address">
+                        <label for="nickName"></label><input type="text" name="nickName" id="nickName" class="form-control input-lg" placeholder="nickName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email"></label><input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
                     </div>
                     <div class="form-group">
                         <label for="password"></label><input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password">
