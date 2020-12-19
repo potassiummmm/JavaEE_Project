@@ -19,4 +19,9 @@ public class Blog {
     private Calendar date = Calendar.getInstance();
     private Integer like;
     private Integer view;
+
+    public static void main(String[] args) {
+        Blog b = new Blog();
+        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
+    }
 }
