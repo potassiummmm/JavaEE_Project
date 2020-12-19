@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class IndexController {
 
@@ -19,4 +21,13 @@ public class IndexController {
         Iterable<Blog> blogs = blogDao.getBlogs();
         return new ModelAndView("index", "blogs", blogs);
     }
+
+    @RequestMapping("/about")
+    public String about(Model model, HttpSession session) {
+        return "about";
+    }
+
+    @RequestMapping("/contact")
+    public String contact(Model model, HttpSession session) { return "contact"; }
+
 }
