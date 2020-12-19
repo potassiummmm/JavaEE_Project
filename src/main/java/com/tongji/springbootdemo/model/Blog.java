@@ -15,4 +15,20 @@ public class Blog {
     private Date date;
     private Integer like;
     private Integer view;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 }
