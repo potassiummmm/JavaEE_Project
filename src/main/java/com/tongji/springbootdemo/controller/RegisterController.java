@@ -20,9 +20,6 @@ public class RegisterController {
     @RequestMapping("/user/register")
     public String login(@RequestParam("nickname") String nickname, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session){
         if(StringUtils.isEmpty(nickname) || StringUtils.isEmpty(email) || StringUtils.isEmpty(password) || StringUtils.isEmpty(confirmPassword)){
-            //TODO: check whether this email has been used
-//            session.setAttribute("loginUser", email);
-//            add to database
             model.addAttribute("registerMsg","Please enter your nick name, e-mail address and password!");
             return "register";
         }
@@ -37,7 +34,7 @@ public class RegisterController {
         else{
             userMapper.addUser(nickname,email,password);
             model.addAttribute("successMsg", "Register successfully! Please login!");
-            return "userList";
+            return "login";
         }
     }
 }
