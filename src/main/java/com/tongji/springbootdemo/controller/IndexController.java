@@ -39,4 +39,10 @@ public class IndexController {
     @RequestMapping("/contact")
     public String contact(Model model, HttpSession session) { return "contact"; }
 
+    @RequestMapping("/logOut")
+    public String logOut(Model model, HttpSession session){
+        session.removeAttribute("currentUser");
+        return "index";
+    }
+
 }
