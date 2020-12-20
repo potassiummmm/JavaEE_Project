@@ -42,4 +42,10 @@ public class PostController {
 //        return new ModelAndView("index", "blogs", blogs);
         return "post";
     }
+
+    @RequestMapping("/comment")
+    public String addComment(@RequestParam("commentContent") String comment){
+        //TODO: Add database service here
+        return "post";
+    }
 }
