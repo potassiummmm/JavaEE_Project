@@ -92,23 +92,13 @@
 <!--  TODO : Need to be beautified-->
     <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold col-lg-8 col-md-10 mx-auto"></div>
     <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%" th:unless="${session.currentUser == null}">
-<!--    <input type="hidden" name="blog.id" th:value="${blog.id}">-->
-<!--    <input type="hidden" name="parentComent.id" value="-1">-->
-<!--    <div class="textarea">-->
-<!--      <textarea name="content" placeholder="Leave a comment"></textarea>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <div class="input">-->
-<!--        <button id="commentpost-btn" type="button" class="btn-primary"><i class="edit icon"></i>Send</button>-->
-<!--      </div>-->
-<!--    </div>-->
       <form role="form" th:action="@{/post/comment}">
         <fieldset>
-          <h2>Send a comment</h2>
+          <div class="font-weight-bold" style="font-size: 28px">Send a comment</div>
           <!--/*@thymesVar id="registerMsg" type=""*/-->
           <p style="color: red" th:text="${commentMsg}" th:if="${not #strings.isEmpty(registerMsg)}"></p>
           <div class="form-group">
-            <label for="commentContent"></label><input type="commentContent" name="commentContent" id="commentContent" class="form-control input-lg" placeholder="Comment here...">
+            <label for="commentContent"></label><textarea type="commentContent" name="commentContent" id="commentContent" class="form-control input-lg" placeholder="Comment here..."></textarea>
           </div>
           <div class="row" style="margin-left: 2%">
             <div class="row align-items-center">
@@ -117,7 +107,6 @@
           </div>
         </fieldset>
       </form>
-
   </div>
 
 
