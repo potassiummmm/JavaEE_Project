@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 @Data
 @NoArgsConstructor
@@ -20,11 +24,6 @@ public class Blog {
     private Integer like;
     private Integer view;
 
-
-//    public static void main(String[] args) {
-//        Blog b = new Blog();
-//        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
-//    }
 
     public String getTitle() {
         return title;
@@ -42,9 +41,9 @@ public class Blog {
     }
 
     public static void main(String[] args) {
-        Blog b = new Blog();
-        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
-
+        DateFormat d = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH);
+        Date dateTest =new Date();
+        System.out.println(d.format(dateTest));
     }
 
     public String getAuthor() {
