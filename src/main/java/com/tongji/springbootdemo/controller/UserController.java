@@ -16,8 +16,7 @@ public class UserController {
     private UserMapper userMapper;
 
     @RequestMapping("/userList")
-    public String getUserList(Model model)
-    {
+    public String getUserList(Model model) {
         List<User> users=userMapper.findAll();
         model.addAttribute("users",users);
         return "userList";

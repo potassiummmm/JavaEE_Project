@@ -17,3 +17,10 @@ create table if not exists `blogs` (
   `like` int NOT NULL,
   `view` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table if not exists `comments` (
+  `blogId` int NOT NULL,
+  `content` varchar(300) DEFAULT NULL,
+  `senderId` char(30) DEFAULT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

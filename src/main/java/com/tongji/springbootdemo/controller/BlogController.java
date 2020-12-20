@@ -16,8 +16,7 @@ public class BlogController {
     private BlogMapper blogMapper;
 
     @RequestMapping("/blogList")
-    public String getUserList(Model model)
-    {
+    public String getUserList(Model model) {
         List<Blog> blogs=blogMapper.findAll();
         model.addAttribute("blogs",blogs);
         return "blogList";

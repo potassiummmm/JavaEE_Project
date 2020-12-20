@@ -12,6 +12,6 @@ import java.util.Date;
 public class Comment {
     private Integer blogId;
     private String content;
-    private Integer nickname;
+    private Integer senderId;
     private Date date;
 }
