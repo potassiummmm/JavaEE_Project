@@ -35,16 +35,23 @@
       <div class="navbar-nav" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/index}">Home</a>
+            <a class="nav-link" th:href="@{/index}" style="font-size:18px">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/about}">About</a>
+            <a class="nav-link" th:href="@{/about}" style="font-size:18px">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/post}">Sample Post</a>
+            <a class="nav-link" th:href="@{/contact}" style="font-size:18px">Contact</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}">Contact</a>
+          <li class="nav-item" th:if="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
+          </li>
+          <li class="nav-item" th:unless="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{/about}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+          </li>
+          <li class="nav-item" th:unless="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
+          </li>
           </li>
         </ul>
       </div>
@@ -83,18 +90,33 @@
   <hr>
 
 <!--  TODO : Need to be beautified-->
-
-  <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%">
-    <input type="hidden" name="blog.id" th:value="${blog.id}">
-    <input type="hidden" name="parentComent.id" value="-1">
-    <div class="textarea">
-      <textarea name="content" placeholder="Leave a comment"></textarea>
-    </div>
-    <div class="form-group">
-      <div class="input">
-        <button id="commentpost-btn" type="button" class="btn-primary"><i class="edit icon"></i>Send</button>
-      </div>
-    </div>
+    <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold col-lg-8 col-md-10 mx-auto"></div>
+    <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%" th:unless="${session.currentUser == null}">
+<!--    <input type="hidden" name="blog.id" th:value="${blog.id}">-->
+<!--    <input type="hidden" name="parentComent.id" value="-1">-->
+<!--    <div class="textarea">-->
+<!--      <textarea name="content" placeholder="Leave a comment"></textarea>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="input">-->
+<!--        <button id="commentpost-btn" type="button" class="btn-primary"><i class="edit icon"></i>Send</button>-->
+<!--      </div>-->
+<!--    </div>-->
+      <form role="form" th:action="@{/post/comment}">
+        <fieldset>
+          <h2>Send a comment</h2>
+          <!--/*@thymesVar id="registerMsg" type=""*/-->
+          <p style="color: red" th:text="${commentMsg}" th:if="${not #strings.isEmpty(registerMsg)}"></p>
+          <div class="form-group">
+            <label for="commentContent"></label><input type="commentContent" name="commentContent" id="commentContent" class="form-control input-lg" placeholder="Comment here...">
+          </div>
+          <div class="row" style="margin-left: 2%">
+            <div class="row align-items-center">
+              <input type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;" value="Send!">
+            </div>
+          </div>
+        </fieldset>
+      </form>
 
   </div>
 
