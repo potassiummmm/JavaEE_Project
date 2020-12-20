@@ -35,6 +35,8 @@ public class LoginController {
         else if (!userMapper.findByEmail(email).isEmpty() && userMapper.findByEmail(email).get(0).getPassword().equals(password)) {
             List<Blog> blogs = blogMapper.findAll();
             model.addAttribute("blogs", blogs);
+            session.setAttribute("loginUser",email);
+            session.setAttribute("currentUser",email);
             return "index";
         }
         else {

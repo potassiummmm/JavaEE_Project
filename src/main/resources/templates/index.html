@@ -42,8 +42,14 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/contact}" style="font-size:18px">Contact</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" th:if="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
+          </li>
+          <li class="nav-item" th:unless="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{/about}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+          </li>
+          <li class="nav-item" th:unless="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
           </li>
         </ul>
       </div>
