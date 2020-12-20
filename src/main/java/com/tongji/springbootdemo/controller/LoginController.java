@@ -1,8 +1,10 @@
 package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.dao.BlogDao;
+import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Blog;
 import org.apache.catalina.connector.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,20 +16,30 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.*;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private BlogMapper blogMapper;
+
     @RequestMapping("/user/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) throws IOException {
-        if(!StringUtils.isEmpty(email) && !StringUtils.isEmpty(password)){
-            session.setAttribute("loginUser", email);
-            BlogDao blogDao = new BlogDao();
-            Collection<Blog> blogs = blogDao.getBlogs();
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session){
+        if (userMapper.findByEmail(email).isEmpty()) {
+            model.addAttribute("loginMsg", "The user does not exist!");
+            return "login";
+        }
+        else if (!userMapper.findByEmail(email).isEmpty() && userMapper.findByEmail(email).get(0).getPassword().equals(password)) {
+            List<Blog> blogs = blogMapper.findAll();
             model.addAttribute("blogs", blogs);
             return "index";
         }
-        model.addAttribute("loginMsg","Wrong email address or password!");
-        return "login";
+        else {
+            model.addAttribute("loginMsg", "Wrong email address or password!");
+            return "login";
+        }
     }
 }
