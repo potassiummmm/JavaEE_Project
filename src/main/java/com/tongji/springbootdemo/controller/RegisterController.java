@@ -30,6 +30,10 @@ public class RegisterController {
             model.addAttribute("registerMsg", "The two passwords are different, please check again!");
             return "register";
         }
+        else if(!userMapper.findByEmail(email).isEmpty()){
+            model.addAttribute("registerMsg", "The email is already taken, please log in or check again!");
+            return "register";
+        }
         else{
             userMapper.addUser(nickname,email,password);
             model.addAttribute("successMsg", "Register successfully! Please login!");
