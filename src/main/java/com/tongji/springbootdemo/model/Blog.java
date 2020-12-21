@@ -1,11 +1,14 @@
 package com.tongji.springbootdemo.model;
 
 
+import com.tongji.springbootdemo.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +21,9 @@ public class Blog {
     private Integer like;
     private Integer view;
     private Date date;
+
+    @Autowired
+    UserMapper userMapper;
 
     public Integer getBlogId() {
         return blogId;

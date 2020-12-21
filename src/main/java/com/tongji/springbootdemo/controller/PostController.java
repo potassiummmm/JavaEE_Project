@@ -51,27 +51,28 @@ public class PostController {
         return "post";
     }
 
-    @RequestMapping("/{authorId}/{blogId}")
-    public String view(@PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model){
+    @RequestMapping("/{authorId}/{privateId}")
+    public String view(@PathVariable("authorId") Integer authorId, @PathVariable("privateId") Integer privateId, Model model){
         List<Blog> blogs = blogMapper.findByAuthor(authorId);
-        model.addAttribute("blog", blogs.get(blogId-1));
+        model.addAttribute("blog", blogs.get(privateId-1));
         return "post";
     }
 
-    @RequestMapping("/sendComment/{authorId}/{blogId}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId){
+    @RequestMapping("/sendComment/{authorId}/{privateId}")
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("privateId") Integer privateId){
         //TODO: Add database service here
         Date date = new Date(System.currentTimeMillis());
-        commentMapper.addComment(blogId, comment, userMapper.findById(authorId).get(0).getUserId(), date);
+        commentMapper.addComment(privateId, comment, userMapper.findById(authorId).get(0).getUserId(), date);
         return "redirect:/post/sendComment/{authorId}/{blogId}";
     }
 
     @RequestMapping("/sendBlog/{authorId}")
-    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId){
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
         User author = userMapper.findById(authorId).get(0);
         Date date = new Date(System.currentTimeMillis());
         Integer privateId=blogMapper.findByAuthor(authorId).size()+1;
+        model.addAttribute("privateId", privateId);
         blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
         return "redirect:/post/{authorId}/{privateId}";
     }
