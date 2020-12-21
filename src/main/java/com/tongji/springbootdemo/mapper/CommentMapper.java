@@ -10,8 +10,11 @@ import java.sql.Date;
 @Repository
 @Mapper
 public interface CommentMapper {
-    @Select("SELECT * FROM comments")
+    @Select("SELECT * FROM comments order by date")
     List<Comment> findAll();
+
+    @Select("SELECT * FROM comments where blogId=#{blogId} order by date")
+    List<Comment> findByBlogId(Integer blogId);
 
     @Insert("INSERT INTO comments(blogId,content,senderId,date) VALUES(#{blogId},#{content},#{senderId},#{view})")
     int addComment(Integer blogId, String content, Integer senderId, Date date);

@@ -14,10 +14,17 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
+    @Override
     public List<Comment> findAll() {
         return commentMapper.findAll();
     }
 
+    @Override
+    public List<Comment> findByBlogId(Integer blogId) {
+        return commentMapper.findByBlogId(blogId);
+    }
+
+    @Override
     public int addComment(Integer blogId, String content, Integer senderId, Date date) {
         return commentMapper.addComment(blogId, content, senderId, date);
     }
