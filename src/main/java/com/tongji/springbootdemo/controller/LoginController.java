@@ -39,6 +39,7 @@ public class LoginController {
             model.addAttribute("blogs", blogs);
             session.setAttribute("userEmail",email);
             session.setAttribute("currentUser",userService.findByEmail(email).get(0).getNickname());
+            session.setAttribute("userId", userService.findByEmail(email).get(0).getUserId());
             return "index";
         }
         else {
