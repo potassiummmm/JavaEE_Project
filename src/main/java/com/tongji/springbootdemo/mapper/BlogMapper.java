@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface BlogMapper {
-    @Select("SELECT * FROM blogs")
+    @Select("SELECT * FROM blogs order by date")
     List<Blog> findAll();
 
     @Select("SELECT * FROM blogs where blogId=#{blogId} order by date")
