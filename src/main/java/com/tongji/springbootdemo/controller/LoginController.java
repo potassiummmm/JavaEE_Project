@@ -35,7 +35,7 @@ public class LoginController {
             List<Blog> blogs = blogMapper.findAll();
             model.addAttribute("blogs", blogs);
             session.setAttribute("loginUser",email);
-            session.setAttribute("currentUser",email);
+            session.setAttribute("currentUser",userMapper.findByEmail(email).get(0).getNickname());
             return "index";
         }
         else {

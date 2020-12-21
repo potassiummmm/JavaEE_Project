@@ -46,4 +46,11 @@ public class PostController {
         //TODO: Add database service here
         return "post";
     }
+
+    @RequestMapping("/sendBlog/{author}")
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("author") String author){
+        //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
+
+        return "post";
+    }
 }
