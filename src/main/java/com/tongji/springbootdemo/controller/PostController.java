@@ -5,6 +5,9 @@ import com.tongji.springbootdemo.mapper.CommentMapper;
 import com.tongji.springbootdemo.mapper.UserMapper;
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.User;
+import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
+import com.tongji.springbootdemo.service.impl.CommentServiceImpl;
+import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,26 +20,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.List;
 
 @Controller
 @RequestMapping("/post")
 public class PostController {
 
     @Autowired
-    private BlogMapper blogMapper;
+    private BlogServiceImpl blogService;
 
     @Autowired
-    private CommentMapper commentMapper;
+    private CommentServiceImpl commentService;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
 
     @RequestMapping
     public String post(Model model) {
-        if (blogMapper.findAll().isEmpty())
+        if (blogService.findAll().isEmpty())
             return "404";
-        model.addAttribute("blog", blogMapper.findAll().toArray()[0]);
+        model.addAttribute("blog", blogService.findAll().toArray()[0]);
         return "post";
     }
 
@@ -51,29 +53,20 @@ public class PostController {
         return "post";
     }
 
-    @RequestMapping("/{authorId}/{privateId}")
-    public String view(@PathVariable("authorId") Integer authorId, @PathVariable("privateId") Integer privateId, Model model){
-        List<Blog> blogs = blogMapper.findByAuthor(authorId);
-        model.addAttribute("blog", blogs.get(privateId-1));
-        return "post";
-    }
-
-    @RequestMapping("/sendComment/{authorId}/{privateId}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("privateId") Integer privateId){
+    @RequestMapping("/sendComment/{blogId}/{authorEmail}")
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("blogId") Integer blogId, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service here
         Date date = new Date(System.currentTimeMillis());
-        commentMapper.addComment(privateId, comment, userMapper.findById(authorId).get(0).getUserId(), date);
-        return "redirect:/post/sendComment/{authorId}/{blogId}";
+        commentService.addComment(blogId, comment, userService.findByEmail(authorEmail).get(0).getUserId(), date);
+        return "redirect:/post/{blogId}";
     }
 
-    @RequestMapping("/sendBlog/{authorId}")
-    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
+    @RequestMapping("/sendBlog/{authorEmail}")
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userMapper.findById(authorId).get(0);
+        User author = userService.findByEmail(authorEmail).get(0);
         Date date = new Date(System.currentTimeMillis());
-        Integer privateId=blogMapper.findByAuthor(authorId).size()+1;
-        model.addAttribute("privateId", privateId);
-        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
-        return "redirect:/post/{authorId}/{privateId}";
+        blogService.addBlog(author.getUserId(),blogService.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
+        return "redirect:/post/1";
     }
 }
