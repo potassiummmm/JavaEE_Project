@@ -1,6 +1,5 @@
 package com.tongji.springbootdemo.controller;
 
-import com.tongji.springbootdemo.dao.BlogDao;
 import com.tongji.springbootdemo.mapper.BlogMapper;
 import com.tongji.springbootdemo.model.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class IndexController {
     @Autowired
     private BlogMapper blogMapper;
 
-    @Autowired
-    private BlogDao blogDao=new BlogDao();
 
     @RequestMapping("/")
     public String index(Model model){

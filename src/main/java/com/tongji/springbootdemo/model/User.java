@@ -1,10 +1,16 @@
 package com.tongji.springbootdemo.model;
 
+import lombok.*;
+
+import java.sql.Date;
+
+
 public class User {
     private Integer userId;
     private String nickname;
     private String email;
     private String password;
+    private Date registrationTime;
 
     public User(String nickname, String email, String password) {
         this.nickname = nickname;
@@ -42,5 +48,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getRegistrationTime() {
+        return registrationTime;
+    }
+
+    public void setRegistrationTime(Date registrationTime) {
+        this.registrationTime = registrationTime;
     }
 }

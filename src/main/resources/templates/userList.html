@@ -11,6 +11,7 @@
         <td>昵称</td>
         <td>邮箱</td>
         <td>密码</td>
+        <td>注册时间</td>
     </tr>
     </thead>
     <tr th:each="item: ${users}">
@@ -18,6 +19,7 @@
         <td th:text="${item.nickname}"></td>
         <td th:text="${item.email}"></td>
         <td th:text="${item.password}"></td>
+        <td th:text="${item.registrationTime}"></td>
     </tr>
 </table>
 </body>

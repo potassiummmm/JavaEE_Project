@@ -1,6 +1,5 @@
 package com.tongji.springbootdemo.controller;
 
-import com.tongji.springbootdemo.dao.BlogDao;
 import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Blog;
 import org.apache.catalina.connector.Response;

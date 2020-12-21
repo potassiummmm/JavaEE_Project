@@ -11,6 +11,8 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
+import java.sql.Date;
+
 @Controller
 public class RegisterController {
 
@@ -32,7 +34,7 @@ public class RegisterController {
             return "register";
         }
         else{
-            userMapper.addUser(nickname,email,password);
+            userMapper.addUser(nickname,email,password,new Date(System.currentTimeMillis()));
             model.addAttribute("successMsg", "Register successfully! Please login!");
             return "login";
         }

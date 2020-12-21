@@ -1,6 +1,5 @@
 package com.tongji.springbootdemo.controller;
 
-import com.tongji.springbootdemo.dao.BlogDao;
 import com.tongji.springbootdemo.mapper.BlogMapper;
 import com.tongji.springbootdemo.model.Blog;
 import org.apache.ibatis.annotations.Param;
@@ -22,24 +21,23 @@ public class PostController {
     @Autowired
     private BlogMapper blogMapper;
 
-    @Autowired
-    private BlogDao blogDao=new BlogDao();
 
     @RequestMapping
     public String post(Model model) {
-        if (blogDao.getBlogs().isEmpty())
+        if (blogMapper.findAll().isEmpty())
             return "404";
-        model.addAttribute("blog", blogDao.getBlogs().toArray()[0]);
+        model.addAttribute("blog", blogMapper.findAll().toArray()[0]);
         return "post";
     }
 
     @RequestMapping("/{id}")
     public String post(Model model, @PathVariable("id") Integer id ){
-        Blog b = blogDao.getBlogById(id);
-        if (b == null)
-            return "404";
-        model.addAttribute("blog", b);
-//        return new ModelAndView("index", "blogs", blogs);
+        //TODO
+//        Blog b = blogMapper.getBlogById(id);
+//        if (b == null)
+//            return "404";
+//        model.addAttribute("blog", b);
+////        return new ModelAndView("index", "blogs", blogs);
         return "post";
     }
 

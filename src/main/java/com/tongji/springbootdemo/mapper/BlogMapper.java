@@ -4,6 +4,7 @@ import com.tongji.springbootdemo.model.Blog;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -11,6 +12,10 @@ import java.util.List;
 public interface BlogMapper {
     @Select("SELECT * FROM blogs")
     List<Blog> findAll();
-    @Insert("INSERT INTO blogs(blogId,title,content,author,like,view) VALUES(#{blogId},#{title},#{content},#{author},#{like},#{view})")
-    int addBlog(Integer blogId,String title,String content,String author,Integer like,Integer view);
+
+    @Select("SELECT * FROM blogs where authorId=#{authorId} order by date")
+    List<Blog> findByAuthor(Integer authorId);
+
+    @Insert("INSERT INTO blogs(authorId,privateIndex,title,content,like,view,date) VALUES(#{authorId},#{privateIndex},#{title},#{content},#{like},#{view},#{date})")
+    int addBlog(Integer authorId, Integer privateIndex, String title, String content, String author, Integer like, Integer view, Date date);
 }
