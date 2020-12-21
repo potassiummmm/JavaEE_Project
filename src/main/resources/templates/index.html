@@ -18,6 +18,7 @@
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
   <!-- Custom styles for this template -->
   <link th:href="@{/css/clean-blog.min.css}" rel="stylesheet">
 
@@ -75,49 +76,16 @@
         <div th:colspan="3" th:text="'Preview: '+${blog.getContent()}" class="font-weight-normal">Content</div>
         <div th:colspan="3" th:text="'Author: '+${blog.getAuthorId()}" class="font-weight-normal">Author</div>
         <div th:colspan="3" th:text="'Date: '+${blog.getDate()}" class="font-weight-normal">Date</div>
+        <i class="fa fa-heart" style="color: lightgray"></i>
+        <span th:text="${blog.getLike()}" class="font-weight-normal"></span>
+        <i class="fa fa-eye" style="color: gray"></i>
+        <span th:text="${blog.getView()}" class="font-weight-normal"></span>
+        <hr>
       </li>
     </ul>
   </div>
 
   <hr>
-
-  <!-- Footer -->
-<!--  <footer>-->
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col-lg-8 col-md-10 mx-auto">-->
-<!--          <ul class="list-inline text-center">-->
-<!--            <li class="list-inline-item">-->
-<!--              <a href="#">-->
-<!--                <span class="fa-stack fa-lg">-->
-<!--                  <i class="fas fa-circle fa-stack-2x"></i>-->
-<!--                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>-->
-<!--                </span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li class="list-inline-item">-->
-<!--              <a href="#">-->
-<!--                <span class="fa-stack fa-lg">-->
-<!--                  <i class="fas fa-circle fa-stack-2x"></i>-->
-<!--                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>-->
-<!--                </span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--            <li class="list-inline-item">-->
-<!--              <a href="#">-->
-<!--                <span class="fa-stack fa-lg">-->
-<!--                  <i class="fas fa-circle fa-stack-2x"></i>-->
-<!--                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>-->
-<!--                </span>-->
-<!--              </a>-->
-<!--            </li>-->
-<!--          </ul>-->
-<!--          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </footer>-->
-<!--  <footer th:replace="fragments :: footer"></footer>-->
 
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
