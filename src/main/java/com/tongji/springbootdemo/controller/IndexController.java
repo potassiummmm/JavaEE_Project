@@ -1,7 +1,7 @@
 package com.tongji.springbootdemo.controller;
 
-import com.tongji.springbootdemo.mapper.BlogMapper;
 import com.tongji.springbootdemo.model.Blog;
+import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +16,12 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     @Autowired
-    private BlogMapper blogMapper;
+    private BlogServiceImpl blogService;
 
 
     @RequestMapping("/")
     public String index(Model model){
-        List<Blog> blogs = blogMapper.findAll();
+        List<Blog> blogs = blogService.findAll();
         //Collection<Blog> blogs = blogDao.getBlogs();
         model.addAttribute("blogs", blogs);
 //        return new ModelAndView("index", "blogs", blogs);

@@ -1,7 +1,6 @@
 package com.tongji.springbootdemo.controller;
 
-import com.tongji.springbootdemo.mapper.UserMapper;
-import com.tongji.springbootdemo.model.User;
+import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,7 @@ import java.sql.Date;
 public class RegisterController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
 
     @RequestMapping("/user/register")
     public String login(@RequestParam("nickname") String nickname, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session){
@@ -29,12 +28,12 @@ public class RegisterController {
             model.addAttribute("registerMsg", "The two passwords are different, please check again!");
             return "register";
         }
-        else if(!userMapper.findByEmail(email).isEmpty()){
+        else if(!userService.findByEmail(email).isEmpty()){
             model.addAttribute("registerMsg", "The email is already taken, please log in or check again!");
             return "register";
         }
         else{
-            userMapper.addUser(nickname,email,password,new Date(System.currentTimeMillis()));
+            userService.addUser(nickname,email,password,new Date(System.currentTimeMillis()));
             model.addAttribute("successMsg", "Register successfully! Please login!");
             return "login";
         }

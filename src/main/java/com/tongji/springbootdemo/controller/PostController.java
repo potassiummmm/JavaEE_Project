@@ -5,6 +5,9 @@ import com.tongji.springbootdemo.mapper.CommentMapper;
 import com.tongji.springbootdemo.mapper.UserMapper;
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.User;
+import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
+import com.tongji.springbootdemo.service.impl.CommentServiceImpl;
+import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,19 +26,19 @@ import java.util.Collection;
 public class PostController {
 
     @Autowired
-    private BlogMapper blogMapper;
+    private BlogServiceImpl blogService;
 
     @Autowired
-    private CommentMapper commentMapper;
+    private CommentServiceImpl commentService;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
 
     @RequestMapping
     public String post(Model model) {
-        if (blogMapper.findAll().isEmpty())
+        if (blogService.findAll().isEmpty())
             return "404";
-        model.addAttribute("blog", blogMapper.findAll().toArray()[0]);
+        model.addAttribute("blog", blogService.findAll().toArray()[0]);
         return "post";
     }
 
@@ -54,16 +57,16 @@ public class PostController {
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("blogId") Integer blogId, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service here
         Date date = new Date(System.currentTimeMillis());
-        commentMapper.addComment(blogId, comment, userMapper.findByEmail(authorEmail).get(0).getUserId(), date);
+        commentService.addComment(blogId, comment, userService.findByEmail(authorEmail).get(0).getUserId(), date);
         return "redirect:/post/{blogId}";
     }
 
     @RequestMapping("/sendBlog/{authorEmail}")
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userMapper.findByEmail(authorEmail).get(0);
+        User author = userService.findByEmail(authorEmail).get(0);
         Date date = new Date(System.currentTimeMillis());
-        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
+        blogService.addBlog(author.getUserId(),blogService.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
         return "redirect:/post/1";
     }
 }

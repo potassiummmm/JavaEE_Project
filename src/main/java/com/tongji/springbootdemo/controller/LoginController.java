@@ -2,6 +2,9 @@ package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Blog;
+import com.tongji.springbootdemo.service.BlogService;
+import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
+import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,21 +24,21 @@ import java.util.*;
 public class LoginController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserServiceImpl userService;
     @Autowired
-    private BlogMapper blogMapper;
+    private BlogServiceImpl blogService;
 
     @RequestMapping("/user/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session){
-        if (userMapper.findByEmail(email).isEmpty()) {
+        if (userService.findByEmail(email).isEmpty()) {
             model.addAttribute("loginMsg", "The user does not exist!");
             return "login";
         }
-        else if (!userMapper.findByEmail(email).isEmpty() && userMapper.findByEmail(email).get(0).getPassword().equals(password)) {
-            List<Blog> blogs = blogMapper.findAll();
+        else if (!userService.findByEmail(email).isEmpty() && userService.findByEmail(email).get(0).getPassword().equals(password)) {
+            List<Blog> blogs = blogService.findAll();
             model.addAttribute("blogs", blogs);
             session.setAttribute("userEmail",email);
-            session.setAttribute("currentUser",userMapper.findByEmail(email).get(0).getNickname());
+            session.setAttribute("currentUser",userService.findByEmail(email).get(0).getNickname());
             return "index";
         }
         else {

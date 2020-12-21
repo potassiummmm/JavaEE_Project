@@ -13,6 +13,9 @@ public interface BlogMapper {
     @Select("SELECT * FROM blogs")
     List<Blog> findAll();
 
+    @Select("SELECT * FROM blogs where blogId=#{blogId} order by date")
+    List<Blog> findById(Integer blogId);
+
     @Select("SELECT * FROM blogs where authorId=#{authorId} order by date")
     List<Blog> findByAuthor(Integer authorId);
 
