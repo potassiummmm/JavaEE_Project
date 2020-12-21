@@ -92,7 +92,7 @@
 <!--  TODO : Need to be beautified-->
     <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold col-lg-8 col-md-10 mx-auto"></div>
     <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%" th:unless="${session.currentUser == null}">
-      <form role="form" th:action="@{/post/comment}">
+      <form role="form" th:action="@{'/post/sendComment/' + ${session.currentUser}}">
         <fieldset>
           <div class="font-weight-bold" style="font-size: 28px">Send a comment</div>
           <!--/*@thymesVar id="registerMsg" type=""*/-->

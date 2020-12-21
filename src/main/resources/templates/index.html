@@ -34,13 +34,10 @@
             <a class="nav-link" th:href="@{/index}" style="font-size:18px">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/about}" style="font-size:18px">About</a>
+            <a class="nav-link" th:href="@{/post}" style="font-size:18px" th:unless="${session.currentUser == null}">Sample Post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/post}" style="font-size:18px">Sample Post</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}" style="font-size:18px">Contact</a>
+            <a class="nav-link" th:href="@{/postBlog}" style="font-size:18px" th:unless="${session.currentUser == null}">Send Blog!</a>
           </li>
           <li class="nav-item" th:if="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
