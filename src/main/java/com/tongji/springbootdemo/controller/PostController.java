@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping("/post")
@@ -50,20 +51,28 @@ public class PostController {
         return "post";
     }
 
-    @RequestMapping("/sendComment/{blogId}/{authorEmail}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("blogId") Integer blogId, @PathVariable("authorEmail") String authorEmail){
-        //TODO: Add database service here
-        Date date = new Date(System.currentTimeMillis());
-        commentMapper.addComment(blogId, comment, userMapper.findByEmail(authorEmail).get(0).getUserId(), date);
-        return "redirect:/post/{blogId}";
+    @RequestMapping("/{authorId}/{blogId}")
+    public String view(@PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model){
+        List<Blog> blogs = blogMapper.findByAuthor(authorId);
+        model.addAttribute("blog", blogs.get(blogId-1));
+        return "post";
     }
 
-    @RequestMapping("/sendBlog/{authorEmail}")
-    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorEmail") String authorEmail){
-        //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userMapper.findByEmail(authorEmail).get(0);
+    @RequestMapping("/sendComment/{authorId}/{blogId}")
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId){
+        //TODO: Add database service here
         Date date = new Date(System.currentTimeMillis());
-        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, author.getNickname(), 0,0,date);
-        return "redirect:/post/1";
+        commentMapper.addComment(blogId, comment, userMapper.findById(authorId).get(0).getUserId(), date);
+        return "redirect:/post/sendComment/{authorId}/{blogId}";
+    }
+
+    @RequestMapping("/sendBlog/{authorId}")
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId){
+        //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
+        User author = userMapper.findById(authorId).get(0);
+        Date date = new Date(System.currentTimeMillis());
+        Integer privateId=blogMapper.findByAuthor(authorId).size()+1;
+        blogMapper.addBlog(authorId,privateId,title,content, author.getNickname(), 0,0,date);
+        return "redirect:/post/{authorId}/{privateId}";
     }
 }
