@@ -63,7 +63,7 @@ public class PostController {
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
         User author = userMapper.findByEmail(authorEmail).get(0);
         Date date = new Date(System.currentTimeMillis());
-        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, author.getNickname(), 0,0,date);
+        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
         return "redirect:/post/1";
     }
 }
