@@ -45,8 +45,8 @@ public class PostController {
     public String view(@PathVariable("blogId") Integer blogId, Model model){
         List<Blog> blogs = blogService.findAll();
         model.addAttribute("blog", blogs.get(blogId-1));
-        List<Comment> comments = commentService.findByBlogId(blogId);
-        model.addAttribute("comments", comments);
+        Comment comment = commentService.findByBlogId(blogId);
+        model.addAttribute("comment", comment);
         return "post";
     }
 
@@ -61,7 +61,7 @@ public class PostController {
     @RequestMapping("/sendBlog/{authorId}")
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userService.findById(authorId).get(0);
+        User author = userService.findById(authorId);
         Date date = new Date(System.currentTimeMillis());
         Integer privateId=blogService.findByAuthor(authorId).size()+1;
         model.addAttribute("authorId", authorId);

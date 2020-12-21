@@ -35,8 +35,8 @@ public class IndexController {
 
     @RequestMapping("/about/{userId}")
     public String about(@PathVariable("userId") Integer userId, Model model, HttpSession session) {
-        List<User> userList=userService.findById(userId);
-        model.addAttribute("user",userList.get(0));
+        User user=userService.findById(userId);
+        model.addAttribute("user",user);
         model.addAttribute("blogs", blogService.findByAuthor(userId));
         return "about";
     }
