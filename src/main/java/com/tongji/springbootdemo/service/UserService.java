@@ -10,9 +10,9 @@ public interface UserService {
 
     int addUser(String nickname, String email, String password, Date registrationTime);
 
-    List<User> findById(Integer userId);
+    User findById(Integer userId);
 
-    List<User> findByEmail(String email);
+    User findByEmail(String email);
 
     int deleteUser(String email);
 }

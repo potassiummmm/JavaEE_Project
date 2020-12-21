@@ -57,14 +57,14 @@ public class PostController {
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("blogId") Integer blogId, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service here
         Date date = new Date(System.currentTimeMillis());
-        commentService.addComment(blogId, comment, userService.findByEmail(authorEmail).get(0).getUserId(), date);
+        commentService.addComment(blogId, comment, userService.findByEmail(authorEmail).getUserId(), date);
         return "redirect:/post/{blogId}";
     }
 
     @RequestMapping("/sendBlog/{authorEmail}")
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorEmail") String authorEmail){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userService.findByEmail(authorEmail).get(0);
+        User author = userService.findByEmail(authorEmail);
         Date date = new Date(System.currentTimeMillis());
         blogService.addBlog(author.getUserId(),blogService.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
         return "redirect:/post/1";

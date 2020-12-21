@@ -10,6 +10,8 @@ public interface BlogService {
 
     List<Blog> findByAuthor(Integer authorId);
 
+    Blog findById(Integer blogId);
+
     String getAuthorName(Integer blogId);
 
     int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view, Date date);

@@ -28,7 +28,7 @@ public class RegisterController {
             model.addAttribute("registerMsg", "The two passwords are different, please check again!");
             return "register";
         }
-        else if(!userService.findByEmail(email).isEmpty()){
+        else if(userService.findByEmail(email) != null){
             model.addAttribute("registerMsg", "The email is already taken, please log in or check again!");
             return "register";
         }

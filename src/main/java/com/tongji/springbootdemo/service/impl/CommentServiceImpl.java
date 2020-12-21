@@ -20,8 +20,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findByBlogId(Integer blogId) {
-        return commentMapper.findByBlogId(blogId);
+    public Comment findByBlogId(Integer blogId) {
+        if (commentMapper.findByBlogId(blogId).isEmpty()) {
+            return null;
+        }
+        return commentMapper.findByBlogId(blogId).get(0);
     }
 
     @Override

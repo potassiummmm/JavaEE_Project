@@ -22,12 +22,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.addUser(nickname, email, password, registrationTime);
     }
 
-    public List<User> findById(Integer userId) {
-        return userMapper.findById(userId);
+    public User findById(Integer userId) {
+        if (userMapper.findById(userId).isEmpty()) {
+            return null;
+        }
+        return userMapper.findById(userId).get(0);
     }
 
-    public List<User> findByEmail(String email) {
-        return userMapper.findByEmail(email);
+    public User findByEmail(String email) {
+        if (userMapper.findByEmail(email).isEmpty()) {
+            return null;
+        }
+        return userMapper.findByEmail(email).get(0);
     }
 
     public int deleteUser(String email) {

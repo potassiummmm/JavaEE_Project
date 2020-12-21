@@ -28,6 +28,14 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public Blog findById(Integer blogId) {
+        if(blogMapper.findById(blogId).isEmpty()){
+            return null;
+        }
+        return blogMapper.findById(blogId).get(0);
+    }
+
+    @Override
     public String getAuthorName(Integer blogId) {
         Integer authorId = blogMapper.findById(blogId).get(0).getAuthorId();
         return userMapper.findById(authorId).get(0).getNickname();

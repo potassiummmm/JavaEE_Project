@@ -30,15 +30,15 @@ public class LoginController {
 
     @RequestMapping("/user/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session){
-        if (userService.findByEmail(email).isEmpty()) {
+        if (userService.findByEmail(email) == null) {
             model.addAttribute("loginMsg", "The user does not exist!");
             return "login";
         }
-        else if (!userService.findByEmail(email).isEmpty() && userService.findByEmail(email).get(0).getPassword().equals(password)) {
+        else if (userService.findByEmail(email) != null && userService.findByEmail(email).getPassword().equals(password)) {
             List<Blog> blogs = blogService.findAll();
             model.addAttribute("blogs", blogs);
             session.setAttribute("userEmail",email);
-            session.setAttribute("currentUser",userService.findByEmail(email).get(0).getNickname());
+            session.setAttribute("currentUser",userService.findByEmail(email).getNickname());
             return "index";
         }
         else {
