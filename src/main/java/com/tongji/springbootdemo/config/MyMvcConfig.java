@@ -16,6 +16,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/post").setViewName("post");
         registry.addViewController("/about").setViewName("about");
         registry.addViewController("/contact").setViewName("contact");
+        registry.addViewController("/postBlog").setViewName("postBlog");
     }
 
 //    @Override
