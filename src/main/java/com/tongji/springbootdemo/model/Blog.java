@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Blog {
@@ -20,28 +19,67 @@ public class Blog {
     private Integer view;
     private Date date;
 
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Integer blogId) {
+        this.blogId = blogId;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public Integer getPrivateIndex() {
+        return privateIndex;
+    }
+
+    public void setPrivateIndex(Integer privateIndex) {
+        this.privateIndex = privateIndex;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
         return content;
     }
 
-    public Integer getBlogId() {
-        return blogId;
+    public void setContent(String content) {
+        this.content = content;
     }
-//    public Calendar getDate() {
-//        return date;
-//    }
-//
-//    public static void main(String[] args) {
-//        Blog b = new Blog();
-//        System.out.println(b.getDate().get(Calendar.YEAR) + "/" + (b.getDate().get(Calendar.MONTH) + 1) + "/" + b.getDate().get(Calendar.DATE));
-//
-//    }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
+    }
+
+    public Integer getView() {
+        return view;
+    }
+
+    public void setView(Integer view) {
+        this.view = view;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

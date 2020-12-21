@@ -72,7 +72,7 @@ public class PostController {
         User author = userMapper.findById(authorId).get(0);
         Date date = new Date(System.currentTimeMillis());
         Integer privateId=blogMapper.findByAuthor(authorId).size()+1;
-        blogMapper.addBlog(authorId,privateId,title,content, author.getNickname(), 0,0,date);
+        blogMapper.addBlog(author.getUserId(),blogMapper.findByAuthor(author.getUserId()).size()+1,title,content, 0,0,date);
         return "redirect:/post/{authorId}/{privateId}";
     }
 }
