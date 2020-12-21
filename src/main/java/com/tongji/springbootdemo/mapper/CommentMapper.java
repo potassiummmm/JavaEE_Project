@@ -14,7 +14,7 @@ public interface CommentMapper {
     List<Comment> findAll();
 
     @Select("SELECT * FROM comments where blogId=#{blogId} order by date")
-    List<Comment> findCommentByBlogId(Integer blogId);
+    List<Comment> findByBlogId(Integer blogId);
 
     @Insert("INSERT INTO comments(blogId,content,senderId,date) VALUES(#{blogId},#{content},#{senderId},#{date})")
     int addComment(Integer blogId, String content, Integer senderId, Date date);
