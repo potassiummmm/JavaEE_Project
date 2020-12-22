@@ -8,8 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title th:unless="${session.currentUser == null}" th:text="${session.currentUser} + '\'s blog'"></title>
-  <title th:if="${session.currentUser == null}" th:text="'Welcome to TJ Blog'"></title>
+  <title th:unless="${user.getNickname() == null}" th:text="${user.getNickname()} + '\'s blog'"></title>
+  <title th:if="${user.getNickname() == null}" th:text="'Welcome to TJ Blog'"></title>
 
   <!-- Bootstrap core CSS -->
   <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -32,7 +32,7 @@
       <div class="navbar-nav" id="navbarResponsive">
         <ul class="navbar-nav ml-auto list-unstyled" style="margin-top: 18px">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/index}" style="font-size:18px">Home</a>
+            <a class="nav-link" th:href="@{/}" style="font-size:18px">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" th:href="@{/postBlog}" style="font-size:18px" th:unless="${session.currentUser == null}">Send Blog!</a>
@@ -49,7 +49,7 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" th:style="'background-image: url(' + @{/img/about-bg.jpg} + ');'">
+  <header class="masthead" th:style="'background-image: url(' + @{/img/ywxk.jpg} + ');'">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -70,8 +70,7 @@
     <ul class="container">
       <li th:each="blog : ${blogs}">
         <a th:href="@{'/post/' + ${blog.getBlogId}}"><h3 th:colspan="3" th:text="'Title: '+${blog.getTitle()}" class="font-weight-bold">Title</h3></a>
-        <div th:colspan="3" th:text="'Preview: '+${blog.getContent()}" class="font-weight-normal">Content</div>
-        <div th:colspan="3" th:text="'Author: '+${blog.getAuthorId()}" class="font-weight-normal">Author</div>
+        <a th:colspan="3" th:text="'Author: '+${blog.getAuthorId()}" th:href="@{'/about/' + ${blog.getAuthorId()}}" class="font-weight-normal">Author</a>
         <div th:colspan="3" th:text="'Date: '+${blog.getDate()}" class="font-weight-normal">Date</div>
       </li>
     </ul>
