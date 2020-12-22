@@ -65,7 +65,7 @@
   <!-- Main Content -->
   <div class="container">
     <div th:if="${#lists.isEmpty(blogs)}">
-      <div class="font-weight-bold text-center" style="font-size: 28px">No blog for now! Ask your friends to join!</div>
+      <div class="font-weight-bold text-center" style="font-size: 28px">No blog for now! Try <a th:href="@{/postBlog}">POST</a>! </div>
     </div>
     <ul class="container">
       <li th:each="blog : ${blogs}">
