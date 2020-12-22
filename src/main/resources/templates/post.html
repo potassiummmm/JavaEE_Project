@@ -19,7 +19,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link th:href="@{/css/clean-blog.min.css}" rel="stylesheet">
+  <link th:href="@{/css/clean-blog.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -36,12 +36,6 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" th:href="@{/index}" style="font-size:18px">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/about}" style="font-size:18px">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}" style="font-size:18px">Contact</a>
           </li>
           <li class="nav-item" th:if="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
@@ -65,9 +59,9 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1 th:text="${blog.getTitle()}">Haha</h1>
-            <h3 th:text="${blog.getAuthorId()}"></h3>
-            <h3 th:text="${blog.getFormattedTime()}"></h3>
+            <h1 th:text="${blog.getTitle()}">Title</h1>
+            <h3 th:text="${blog.getAuthorNickname()}">Author Name</h3>
+            <h3 th:text="${blog.getFormattedTime()}">Time</h3>
           </div>
         </div>
       </div>
@@ -85,11 +79,9 @@
     </div>
   </article>
 
-  <hr>
-
 <!--  TODO : Need to be beautified-->
-    <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold col-lg-8 col-md-10 mx-auto"></div>
-    <div id="comment-form" class="floating-label-form-group " style="margin-left: 20%" th:unless="${session.currentUser == null}">
+    <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold mt-5 mb-5"></div>
+    <div id="comment-form" class="container mt-5 mb-5" th:unless="${session.currentUser == null}">
       <form role="form" th:action="@{'/post/sendComment/' + ${session.userId} + '/' + ${blog.getBlogId()}}">
         <fieldset>
           <div class="font-weight-bold" style="font-size: 28px">Send a comment</div>
@@ -100,44 +92,27 @@
           </div>
           <div class="row" style="margin-left: 2%">
             <div class="row align-items-center">
-              <input type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;" value="Send!">
+              <input type="submit" class="btn btn-primary btn-block" style="color: black;" value="Send!">
             </div>
           </div>
         </fieldset>
       </form>
+      <div class="container">
+        <div th:if="${#lists.isEmpty(comments)}">
+          <div class="font-weight-bold text-center" style="font-size: 28px">No comment for now!</div>
+        </div>
+        <ul class="container timeline">
+          <li th:each="comment : ${comments}">
+            <a th:href="@{'/about/' + ${comment.SenderId()}}" th:text="${comment.getSenderId()}" class="font-weight-normal"></a>
+            <p th:text="${comment.getFormattedTime()}" class="font-weight-normal"></p>
+            <div th:text="${comment.getContent()}" class="font-weight-normal"></div>
+          </li>
+        </ul>
+      </div>
   </div>
 
 
 <!--  TODO : show commets-->
-<!--  <div class="container">-->
-<!--      <form id="messageForm" th:action="@{/(post)}" th:object="${blog}" action="#" method="post">-->
-
-<!--      <div class="form-group">-->
-<!--        <label for="comment">Leave Your Comment:</label>-->
-<!--        <textarea type="text" th:field="*{comment}" > </textarea>-->
-<!--      </div>-->
-
-<!--      <button type="submit" class="btn btn-primary">Submit</button>-->
-<!--    </form>-->
-<!--  </div>-->
-
-  <div class="container">
-    <div th:if="${#lists.isEmpty(comments)}">
-      <div class="font-weight-bold text-center" style="font-size: 28px">No comment for now!</div>
-    </div>
-    <ul class="container">
-      <li th:each="comment : ${comments}">
-        <div th:colspan="3" th:text="${comment.getContent()}" class="font-weight-normal">Content</div>
-        <div th:colspan="3" th:text="${comment.getSenderId()}" class="font-weight-normal">Author</div>
-        <div th:colspan="3" th:text="${comment.getFormattedTime()}" class="font-weight-normal">Date</div>
-        <!--        <div th:colspan="3">-->
-        <!--          <span th:text="${blog.getDate().get(1)}+' /'" class="font-weight-light"></span>-->
-        <!--          <span th:text="${blog.getDate().get(2)+1}+' /'" class="font-weight-light"></span>-->
-        <!--          <span th:text="${blog.getDate().get(5)}" class="font-weight-light"></span>-->
-        <!--        </div>-->
-      </li>
-    </ul>
-  </div>
 
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
