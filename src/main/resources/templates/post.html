@@ -59,9 +59,9 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1 th:text="${blog.getTitle()}">Title</h1>
-            <h3 th:text="${blog.getAuthorNickname()}">Author Name</h3>
-            <h3 th:text="${blog.getFormattedTime()}">Time</h3>
+            <h1 th:text="${blog.getTitle()}" style="font-size: 72px">Title</h1>
+            <h1 th:text="${blog.getAuthorNickname()}" style="font-size: 48px">Author Name</h1>
+            <h1 th:text="${blog.getFormattedTime()}" style="font-size: 48px">Time</h1>
           </div>
         </div>
       </div>
@@ -72,15 +72,16 @@
   <article>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="font-weight-bold mt-5 mb-5" style="font-size: 32px">
           <span th:utext="${blog.getContent()}"></span>
         </div>
       </div>
     </div>
   </article>
 
+  <hr>
 <!--  TODO : Need to be beautified-->
-    <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="font-weight-bold mt-5 mb-5"></div>
+    <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="container font-weight-bold text-center" style="font-size: 32px"></div>
     <div id="comment-form" class="container mt-5 mb-5" th:unless="${session.currentUser == null}">
       <form role="form" th:action="@{'/post/sendComment/' + ${session.userId} + '/' + ${blog.getBlogId()}}">
         <fieldset>
@@ -97,23 +98,23 @@
           </div>
         </fieldset>
       </form>
-      <div class="container">
-        <div th:if="${#lists.isEmpty(comments)}">
-          <div class="font-weight-bold text-center" style="font-size: 28px">No comment for now!</div>
-        </div>
-        <ul class="container timeline">
-          <li th:each="comment : ${comments}">
-            <a th:href="@{'/about/' + ${comment.SenderId()}}" th:text="${comment.getSenderId()}" class="font-weight-normal"></a>
-            <p th:text="${comment.getFormattedTime()}" class="font-weight-normal"></p>
-            <div th:text="${comment.getContent()}" class="font-weight-normal"></div>
-          </li>
-        </ul>
-      </div>
   </div>
 
 
 <!--  TODO : show commets-->
 
+  <div class="container mt-5 mb-5">
+    <div th:if="${#lists.isEmpty(comments)}">
+      <div class="font-weight-bold text-center" style="font-size: 28px">No comment for now!</div>
+    </div>
+    <ul class="container timeline">
+      <li th:each="comment : ${comments}">
+        <a th:href="@{'/about/' + ${comment.getSenderId}}" th:text="${comment.getSenderNickname()}" class="font-weight-bolder" style="font-size: 24px"></a>
+        <p th:text="${'At: ' + comment.getFormattedTime()}" class="font-weight-bolder" style="font-size: 24px"></p>
+        <div th:text="${'Said: ' + comment.getContent()}" class="font-weight-bolder" style="font-size: 24px"></div>
+      </li>
+    </ul>
+  </div>
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
