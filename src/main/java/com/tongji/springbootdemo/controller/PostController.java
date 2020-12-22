@@ -2,7 +2,9 @@ package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.Comment;
+import com.tongji.springbootdemo.model.Like;
 import com.tongji.springbootdemo.model.User;
+import com.tongji.springbootdemo.service.LikeService;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import com.tongji.springbootdemo.service.impl.CommentServiceImpl;
 import com.tongji.springbootdemo.service.impl.UserServiceImpl;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +35,9 @@ public class PostController {
 
     @Autowired
     private UserServiceImpl userService;
+    
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping
     public String post(Model model) {
@@ -69,4 +75,18 @@ public class PostController {
         String url = "redirect:/post/" + blogService.findAll().size();
         return url;
     }
+    
+    @RequestMapping("/deleteBlog/{blogId}")
+    public String sendBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session){
+    
+        likeService.deleteLikeByBlogId(blogId);
+        blogService.deleteBlog(blogId);
+        
+        Integer userId=(Integer) session.getAttribute("userId");
+        User user=userService.findById(userId);
+        model.addAttribute("user",user);
+        model.addAttribute("blogs", blogService.findByAuthor(userId));
+        return "about";
+    }
+    
 }

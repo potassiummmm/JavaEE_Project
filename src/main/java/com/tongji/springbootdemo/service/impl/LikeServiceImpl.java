@@ -31,4 +31,9 @@ public class LikeServiceImpl implements LikeService {
 	public List<Like> findByBlogId(Integer blogId) {
 		return likeMapper.findByBlogId(blogId);
 	}
+	
+	@Override
+	public int deleteLikeByBlogId(Integer blogId) {
+		return likeMapper.deleteLikeByBlogId(blogId);
+	}
 }

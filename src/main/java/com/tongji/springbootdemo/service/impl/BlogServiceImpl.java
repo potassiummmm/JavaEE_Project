@@ -55,4 +55,9 @@ public class BlogServiceImpl implements BlogService {
     public void updateView(Integer view, Integer blogId) {
         blogMapper.updateView(view,blogId);
     }
+    
+    @Override
+    public int deleteBlog(Integer blogId) {
+        return blogMapper.deleteBlog(blogId);
+    }
 }
