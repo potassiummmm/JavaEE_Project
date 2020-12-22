@@ -59,9 +59,9 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
-            <h1 th:text="${blog.getTitle()}" style="font-size: 72px">Title</h1>
-            <h1 th:text="${blog.getAuthorNickname()}" style="font-size: 48px">Author Name</h1>
-            <h1 th:text="${blog.getFormattedTime()}" style="font-size: 48px">Time</h1>
+            <div th:text="${blog.getTitle()}" style="font-size: 72px">Title</div>
+            <a th:text="${blog.getAuthorNickname()}" style="font-size: 48px; color: white" th:href="@{'/about/' + ${blog.getAuthorId()}}">Author Name</a>
+            <div th:text="${blog.getFormattedTime()}" style="font-size: 48px">Time</div>
           </div>
         </div>
       </div>
