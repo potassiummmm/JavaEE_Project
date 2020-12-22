@@ -10,7 +10,7 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Controller
 public class RegisterController {
@@ -33,7 +33,7 @@ public class RegisterController {
             return "register";
         }
         else{
-            userService.addUser(nickname,email,password,new Date(System.currentTimeMillis()));
+            userService.addUser(nickname,email,password,new Timestamp(System.currentTimeMillis()));
             model.addAttribute("successMsg", "Register successfully! Please login!");
             return "login";
         }

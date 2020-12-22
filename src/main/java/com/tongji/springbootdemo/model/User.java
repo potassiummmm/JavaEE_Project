@@ -2,7 +2,7 @@ package com.tongji.springbootdemo.model;
 
 import lombok.*;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,7 +11,7 @@ public class User {
     private String nickname;
     private String email;
     private String password;
-    private Date registrationTime;
+    private Timestamp registrationTime;
 
     public User(String nickname, String email, String password) {
         this.nickname = nickname;
@@ -51,11 +51,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getRegistrationTime() {
+    public Timestamp getRegistrationTime() {
         return registrationTime;
     }
 
-    public void setRegistrationTime(Date registrationTime) {
+    public void setRegistrationTime(Timestamp registrationTime) {
         this.registrationTime = registrationTime;
     }
 }

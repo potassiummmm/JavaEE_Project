@@ -6,7 +6,7 @@ import com.tongji.springbootdemo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -20,15 +20,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment findByBlogId(Integer blogId) {
-        if (commentMapper.findByBlogId(blogId).isEmpty()) {
-            return null;
-        }
-        return commentMapper.findByBlogId(blogId).get(0);
+    public List<Comment> findByBlogId(Integer blogId) {
+        return commentMapper.findByBlogId(blogId);
     }
 
     @Override
-    public int addComment(Integer blogId, String content, Integer senderId, Date date) {
+    public int addComment(Integer blogId, String content, Integer senderId, Timestamp date) {
         return commentMapper.addComment(blogId, content, senderId, date);
     }
 }

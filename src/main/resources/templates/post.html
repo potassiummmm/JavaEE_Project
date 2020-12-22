@@ -67,7 +67,7 @@
           <div class="post-heading">
             <h1 th:text="${blog.getTitle()}">Haha</h1>
             <h3 th:text="${blog.getAuthorId()}"></h3>
-            <h3 th:text="${blog.getDate()}"></h3>
+            <h3 th:text="${blog.getFormattedTime()}"></h3>
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
       <li th:each="comment : ${comments}">
         <div th:colspan="3" th:text="${comment.getContent()}" class="font-weight-normal">Content</div>
         <div th:colspan="3" th:text="${comment.getSenderId()}" class="font-weight-normal">Author</div>
-        <div th:colspan="3" th:text="${comment.getDate()}" class="font-weight-normal">Date</div>
+        <div th:colspan="3" th:text="${comment.getFormattedTime()}" class="font-weight-normal">Date</div>
         <!--        <div th:colspan="3">-->
         <!--          <span th:text="${blog.getDate().get(1)}+' /'" class="font-weight-light"></span>-->
         <!--          <span th:text="${blog.getDate().get(2)+1}+' /'" class="font-weight-light"></span>-->

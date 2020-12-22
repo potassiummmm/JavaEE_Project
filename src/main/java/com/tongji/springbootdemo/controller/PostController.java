@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
@@ -45,15 +45,15 @@ public class PostController {
     public String view(@PathVariable("blogId") Integer blogId, Model model){
         List<Blog> blogs = blogService.findAll();
         model.addAttribute("blog", blogs.get(blogId-1));
-        Comment comment = commentService.findByBlogId(blogId);
-        model.addAttribute("comment", comment);
+        List<Comment> comments = commentService.findByBlogId(blogId);
+        model.addAttribute("comments", comments);
         return "post";
     }
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model){
         //TODO: Add database service here
-        Date date = new Date(System.currentTimeMillis());
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);
         return "redirect:/post/{blogId}";
     }
@@ -62,7 +62,7 @@ public class PostController {
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
         User author = userService.findById(authorId);
-        Date date = new Date(System.currentTimeMillis());
+        Timestamp date = new Timestamp(System.currentTimeMillis());
         Integer privateId=blogService.findByAuthor(authorId).size()+1;
         model.addAttribute("authorId", authorId);
         model.addAttribute("privateId", privateId);

@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @NoArgsConstructor
@@ -14,12 +15,13 @@ import java.util.List;
 public class Blog {
     private Integer blogId;
     private Integer authorId;
+    private String authorNickname;
     private Integer privateIndex;
     private String title;
     private String content;
     private Integer like;
     private Integer view;
-    private Date date;
+    private Timestamp date;
 
     public Integer getBlogId() {
         return blogId;
@@ -35,6 +37,14 @@ public class Blog {
 
     public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthorNickname() {
+        return authorNickname;
+    }
+
+    public void setAuthorNickname(String authorNickname) {
+        this.authorNickname = authorNickname;
     }
 
     public Integer getPrivateIndex() {
@@ -82,11 +92,30 @@ public class Blog {
         this.view = view;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public String getFormattedTime() {
+        long interval = System.currentTimeMillis() - date.getTime();
+        StringBuilder sb = new StringBuilder();
+        if(interval < 1000 * 60){
+            sb.append("just now");
+        }
+        else if (interval < 1000 * 3600) {
+            sb.append(interval / 60000).append(" minutes ago");
+        }
+        else if (interval < 1000 * 3600 * 24) {
+            sb.append(interval / 3600000).append(" hours ago");
+        }
+        else{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+            sb.append(dateFormat.format(date));
+        }
+        return sb.toString();
+    }
+
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }
