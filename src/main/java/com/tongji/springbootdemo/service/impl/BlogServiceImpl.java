@@ -23,6 +23,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<Blog> findByMostRecent(){
+        return blogMapper.findByMostRecent();
+    }
+
+    @Override
+    public List<Blog> findByMostFavored() {
+        return blogMapper.findByMostFavored();
+    }
+
+    @Override
     public List<Blog> findByAuthor(Integer authorId) {
         return blogMapper.findByAuthor(authorId);
     }

@@ -13,6 +13,12 @@ public interface BlogMapper {
     @Select("SELECT * FROM blogs order by date")
     List<Blog> findAll();
 
+    @Select("SELECT * FROM blogs order by date DESC")
+    List<Blog> findByMostRecent();
+
+    @Select("SELECT * FROM blogs order by `like` DESC")
+    List<Blog> findByMostFavored();
+
     @Select("SELECT * FROM blogs where blogId=#{blogId} order by date")
     List<Blog> findById(Integer blogId);
 
