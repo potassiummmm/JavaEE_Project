@@ -33,6 +33,11 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/index")
+    public String index2(Model model) {
+        return "redirect:/";
+    }
+
     @RequestMapping("/about/{userId}")
     public String about(@PathVariable("userId") Integer userId, Model model, HttpSession session) {
         User user=userService.findById(userId);
