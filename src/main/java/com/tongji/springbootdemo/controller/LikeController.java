@@ -31,7 +31,8 @@ public class LikeController {
 		Blog blog = blogService.findById(blogId);
 		List<Like> likes = likeService.findById(userId, blogId);
 		if(!likes.isEmpty()) {
-			session.setAttribute("isClick", 1);
+			blogService.updateLike(blog.getLike() - 1, blogId);
+			likeService.deleteLike(userId, blogId);
 		}
 		else {
 			blogService.updateLike(blog.getLike() + 1, blogId);
@@ -49,7 +50,6 @@ public class LikeController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		Blog blog = blogService.findById(blogId);
 		List<Like> likes = likeService.findById(userId, blogId);
-		
 		model.addAttribute("likes", likes);
 		return "likeList";
 	}

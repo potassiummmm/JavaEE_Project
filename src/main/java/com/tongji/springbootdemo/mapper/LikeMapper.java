@@ -21,6 +21,6 @@ public interface LikeMapper
 	@Select("SELECT * FROM likes WHERE userId=#{userId} AND blogId=#{blogId}")
 	List<Like> findById(Integer userId,Integer blogId);
 	
-	@Delete("DELETE FORM likes WHERE userId=#{userId} AND blogId=#{blogId}")
+	@Delete("DELETE FROM likes WHERE userId=#{userId} AND blogId=#{blogId}")
 	int deleteLike(Integer userId,Integer blogId);
 }
