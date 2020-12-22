@@ -1,7 +1,6 @@
 package com.tongji.springbootdemo.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
@@ -14,6 +13,7 @@ public class Comment {
     private Integer blogId;
     private String content;
     private Integer senderId;
+    private String senderNickname;
     private Timestamp date;
 
     public Integer getCommentId() {
@@ -48,6 +48,14 @@ public class Comment {
         this.senderId = senderId;
     }
 
+    public String getSenderNickname() {
+        return senderNickname;
+    }
+
+    public void setSenderNickname(String senderNickname) {
+        this.senderNickname = senderNickname;
+    }
+
     public Timestamp getDate() {
         return date;
     }
@@ -59,10 +67,10 @@ public class Comment {
             sb.append("just now");
         }
         else if (interval < 1000 * 3600) {
-            sb.append(interval / 60).append(" minutes ago");
+            sb.append(interval / 60000).append(" minutes ago");
         }
         else if (interval < 1000 * 3600 * 24) {
-            sb.append(interval / 3600).append(" hours ago");
+            sb.append(interval / 3600000).append(" hours ago");
         }
         else{
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");

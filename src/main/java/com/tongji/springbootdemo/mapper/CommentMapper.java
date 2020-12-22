@@ -16,6 +16,6 @@ public interface CommentMapper {
     @Select("SELECT * FROM comments where blogId=#{blogId} order by date")
     List<Comment> findByBlogId(Integer blogId);
 
-    @Insert("INSERT INTO comments(blogId,content,senderId,date) VALUES(#{blogId},#{content},#{senderId},#{date})")
-    int addComment(Integer blogId, String content, Integer senderId, Timestamp date);
+    @Insert("INSERT INTO comments(blogId,content,senderId,senderNickname,date) VALUES(#{blogId},#{content},#{senderId},#{senderNickname},#{date})")
+    int addComment(Integer blogId, String content, Integer senderId, String senderNickname, Timestamp date);
 }

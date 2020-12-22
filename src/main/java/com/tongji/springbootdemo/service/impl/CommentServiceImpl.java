@@ -1,6 +1,6 @@
 package com.tongji.springbootdemo.service.impl;
 
-import com.tongji.springbootdemo.mapper.CommentMapper;
+import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Comment;
 import com.tongji.springbootdemo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,8 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<Comment> findAll() {
@@ -26,6 +28,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int addComment(Integer blogId, String content, Integer senderId, Timestamp date) {
-        return commentMapper.addComment(blogId, content, senderId, date);
+        return commentMapper.addComment(blogId, content, senderId, userMapper.findById(senderId).get(0).getNickname(), date);
     }
 }
