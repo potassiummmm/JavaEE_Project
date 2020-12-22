@@ -103,10 +103,22 @@ public class Blog {
             sb.append("just now");
         }
         else if (interval < 1000 * 3600) {
-            sb.append(interval / 60000).append(" minutes ago");
+            sb.append(interval / 60000);
+            if(interval < 120000){
+                sb.append(" minute ago");
+            }
+            else{
+                sb.append(" minutes ago");
+            }
         }
         else if (interval < 1000 * 3600 * 24) {
-            sb.append(interval / 3600000).append(" hours ago");
+            sb.append(interval / 3600000);
+            if(interval < 7200000){
+                sb.append(" hour ago");
+            }
+            else{
+                sb.append(" hours ago");
+            }
         }
         else{
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");

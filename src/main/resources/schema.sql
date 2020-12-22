@@ -39,4 +39,4 @@ create table if not exists `likes` (
     `userId` int NOT NULL,
     `nickname` varchar(30) DEFAULT NULL,
     `blogId` int NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
