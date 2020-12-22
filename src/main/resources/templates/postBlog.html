@@ -72,6 +72,7 @@
                 <!--/*@thymesVar id="registerMsg" type=""*/-->
                 <p style="color: red; font-size: 36px" th:text="${sendBlogMsg}" th:if="${not #strings.isEmpty(sendBlogMsg)}"></p>
                 <div class="form-group"></div>
+                <p style="color: red" th:text="${sentMsg}" th:if="${not #strings.isEmpty(sentMsg)}"></p>
                 <div class="form-group">
                     <textarea rows=1 type="blogTitle" name="blogTitle" id="blogTitle" class="form-control input-lg" placeholder="Blog Title..." style="font-size: 28px"></textarea>
                     <h1></h1>

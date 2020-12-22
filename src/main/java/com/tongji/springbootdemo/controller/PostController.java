@@ -5,6 +5,7 @@ import com.tongji.springbootdemo.model.Comment;
 import com.tongji.springbootdemo.model.User;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import com.tongji.springbootdemo.service.impl.CommentServiceImpl;
+import com.tongji.springbootdemo.service.impl.TextModerationImpl;
 import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class PostController {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private TextModerationImpl textModeration;
+
     @RequestMapping
     public String post(Model model) {
         if (blogService.findAll().isEmpty())
@@ -52,7 +56,11 @@ public class PostController {
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId){
-        //TODO: Add database service here
+        //TODO: Add model to show commentInvalidMsg
+//        if(!textModeration.isValid(comment)){
+//            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
+//            return "";
+//        }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);
         return "redirect:/post/{blogId}";
@@ -61,6 +69,14 @@ public class PostController {
     @RequestMapping("/sendBlog/{authorId}")
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
+        if(!textModeration.isValid(title)){
+            model.addAttribute("sentMsg", "The title contains sensitive words!");
+            return "postBlog";
+        }
+        if(!textModeration.isValid(content)){
+            model.addAttribute("sentMsg", "The content contains sensitive words!");
+            return "postBlog";
+        }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         Integer privateId=blogService.findByAuthor(authorId).size()+1;
         model.addAttribute("blogId", blogService.findAll().size());
