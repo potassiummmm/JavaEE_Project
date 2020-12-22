@@ -1,6 +1,7 @@
 package com.tongji.springbootdemo.model;
 
 
+import com.tongji.springbootdemo.service.MdToHtml;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,6 +54,11 @@ public class Blog {
     }
 
     public String getContent() {
+        String h5content = MdToHtml.convert(content);
+        return h5content;
+    }
+
+    public String getPlainContent() {
         return content;
     }
 
