@@ -4,7 +4,7 @@ import com.tongji.springbootdemo.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -14,7 +14,7 @@ public interface UserMapper {
     List<User> findAll();
 
     @Insert("INSERT INTO users(nickname,email,password,registrationTime) VALUES(#{nickname},#{email},#{password},#{registrationTime})")
-    int addUser(String nickname, String email, String password, Date registrationTime);
+    int addUser(String nickname, String email, String password, Timestamp registrationTime);
 
     @Select("SELECT * FROM users where userId=#{userId}")
     List<User> findById(Integer userId);

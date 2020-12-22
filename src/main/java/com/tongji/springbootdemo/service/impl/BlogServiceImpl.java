@@ -7,7 +7,7 @@ import com.tongji.springbootdemo.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -42,7 +42,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view, Date date) {
-        return blogMapper.addBlog(privateIndex, authorId, title, content, like, view, date);
+    public int addBlog(Integer privateIndex, Integer authorId,String title, String content, Integer like, Integer view, Timestamp date) {
+        return blogMapper.addBlog(privateIndex, authorId, userMapper.findById(authorId).get(0).getNickname(), title, content, like, view, date);
     }
 }

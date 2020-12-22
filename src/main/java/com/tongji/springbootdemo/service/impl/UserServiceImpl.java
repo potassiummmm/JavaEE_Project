@@ -6,7 +6,7 @@ import com.tongji.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.findAll();
     }
 
-    public int addUser(String nickname, String email, String password, Date registrationTime) {
+    public int addUser(String nickname, String email, String password, Timestamp registrationTime) {
         return userMapper.addUser(nickname, email, password, registrationTime);
     }
 

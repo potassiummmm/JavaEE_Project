@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +14,7 @@ public class Comment {
     private Integer blogId;
     private String content;
     private Integer senderId;
-    private Date date;
+    private Timestamp date;
 
     public Integer getCommentId() {
         return commentId;
@@ -47,11 +48,30 @@ public class Comment {
         this.senderId = senderId;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public String getFormattedTime() {
+        long interval = System.currentTimeMillis() - date.getTime();
+        StringBuilder sb = new StringBuilder();
+        if(interval < 1000 * 60){
+            sb.append("just now");
+        }
+        else if (interval < 1000 * 3600) {
+            sb.append(interval / 60).append(" minutes ago");
+        }
+        else if (interval < 1000 * 3600 * 24) {
+            sb.append(interval / 3600).append(" hours ago");
+        }
+        else{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+            sb.append(dateFormat.format(date));
+        }
+        return sb.toString();
+    }
+
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }

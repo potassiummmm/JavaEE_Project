@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Repository
 @Mapper
@@ -17,5 +17,5 @@ public interface CommentMapper {
     List<Comment> findByBlogId(Integer blogId);
 
     @Insert("INSERT INTO comments(blogId,content,senderId,date) VALUES(#{blogId},#{content},#{senderId},#{date})")
-    int addComment(Integer blogId, String content, Integer senderId, Date date);
+    int addComment(Integer blogId, String content, Integer senderId, Timestamp date);
 }
