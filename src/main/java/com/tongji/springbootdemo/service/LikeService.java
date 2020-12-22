@@ -11,5 +11,9 @@ public interface LikeService {
 	
 	List<Like> findById(Integer userId, Integer blogId);
 	
+	List<Like> findByBlogId(Integer blogId);
+	
 	int deleteLike(Integer userId,Integer blogId);
+	
+	int deleteLikeByBlogId(Integer blogId);
 }

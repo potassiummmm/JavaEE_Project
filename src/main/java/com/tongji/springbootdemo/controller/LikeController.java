@@ -31,7 +31,8 @@ public class LikeController {
 		Blog blog = blogService.findById(blogId);
 		List<Like> likes = likeService.findById(userId, blogId);
 		if(!likes.isEmpty()) {
-			session.setAttribute("isClick", 1);
+			blogService.updateLike(blog.getLike() - 1, blogId);
+			likeService.deleteLike(userId, blogId);
 		}
 		else {
 			blogService.updateLike(blog.getLike() + 1, blogId);
@@ -47,9 +48,7 @@ public class LikeController {
 	@RequestMapping( "/likeList/{blogId}")
 	public String likeList(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
-		Blog blog = blogService.findById(blogId);
-		List<Like> likes = likeService.findById(userId, blogId);
-		
+		List<Like> likes = likeService.findByBlogId(blogId);
 		model.addAttribute("likes", likes);
 		return "likeList";
 	}

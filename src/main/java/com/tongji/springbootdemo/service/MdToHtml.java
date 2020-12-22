@@ -8,21 +8,28 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 public class MdToHtml {
     public static String convert(String md) {
-        String escapeMd = md.replace("<", "&lt;")
-                            .replace(">", "&gt;")
-                            .replace("&", "&amp;");
-
+        String escapeMd = md.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+        System.out.println(escapeMd);
+        
         MutableDataSet options = new MutableDataSet();
-
+        
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
-
+        
         // You can re-use parser and renderer instances
         Node document = parser.parse(escapeMd);
         String htmlOutPut = renderer.render(document);  // "<p>This is <em>Sparta</em></p>\n"
-        htmlOutPut = htmlOutPut.replace("&lt;", "<")
-                               .replace("&gt;", ">")
-                               .replace("&amp;", "&");
+        htmlOutPut = htmlOutPut.replace("&amp;", "&")
+                .replace("&lt;", "<")
+                .replace("&gt;", ">");
         return htmlOutPut;
+    }
+    
+    public static void main(String[] args) {
+        String aa = "&lt;";
+        String bb = MdToHtml.convert(aa);
+        System.out.println(bb);
     }
 }
