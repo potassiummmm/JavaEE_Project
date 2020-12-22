@@ -27,9 +27,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model){
         List<Blog> blogs = blogService.findAll();
-        //Collection<Blog> blogs = blogDao.getBlogs();
         model.addAttribute("blogs", blogs);
-//        return new ModelAndView("index", "blogs", blogs);
         return "index";
     }
 
@@ -52,7 +50,7 @@ public class IndexController {
     @RequestMapping("/logOut")
     public String logOut(Model model, HttpSession session){
         session.removeAttribute("currentUser");
-        return "index";
+        return "redirect:/";
     }
 
 }

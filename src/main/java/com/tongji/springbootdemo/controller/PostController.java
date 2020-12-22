@@ -51,7 +51,7 @@ public class PostController {
     }
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model){
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId){
         //TODO: Add database service here
         Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);
@@ -61,12 +61,11 @@ public class PostController {
     @RequestMapping("/sendBlog/{authorId}")
     public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
         //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        User author = userService.findById(authorId);
         Timestamp date = new Timestamp(System.currentTimeMillis());
         Integer privateId=blogService.findByAuthor(authorId).size()+1;
-        model.addAttribute("authorId", authorId);
-        model.addAttribute("privateId", privateId);
-        blogService.addBlog(authorId,blogService.findByAuthor(authorId).size()+1,title,content, 0,0,date);
-        return "redirect:/";
+        model.addAttribute("blogId", blogService.findAll().size());
+        blogService.addBlog(privateId,authorId,title,content, 0,0,date);
+        String url = "redirect:/post/" + blogService.findAll().size();
+        return url;
     }
 }

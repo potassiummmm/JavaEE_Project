@@ -30,6 +30,7 @@ public class LoginController {
 
     @RequestMapping("/user/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session){
+
         if (userService.findByEmail(email) == null) {
             model.addAttribute("loginMsg", "The user does not exist!");
             return "login";
@@ -40,6 +41,7 @@ public class LoginController {
             session.setAttribute("userEmail",email);
             session.setAttribute("currentUser",userService.findByEmail(email).getNickname());
             session.setAttribute("userId", userService.findByEmail(email).getUserId());
+            System.out.println(userService.findByEmail(email).getUserId());
             return "index";
         }
         else {
