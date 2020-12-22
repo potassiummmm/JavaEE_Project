@@ -29,6 +29,7 @@ drop table if exists `comments`;
 create table if not exists `comments` (
   `blogId` int NOT NULL,
   `content` varchar(300) DEFAULT NULL,
-  `senderId` char(30) DEFAULT NULL,
+  `senderId` int NOT NULL,
+  `senderNickname` char(30) DEFAULT NULL,
   `date` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
