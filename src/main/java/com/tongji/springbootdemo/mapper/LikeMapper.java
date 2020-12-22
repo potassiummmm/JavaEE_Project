@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -21,6 +20,12 @@ public interface LikeMapper
 	@Select("SELECT * FROM likes WHERE userId=#{userId} AND blogId=#{blogId}")
 	List<Like> findById(Integer userId,Integer blogId);
 	
+	@Select("SELECT * FROM likes WHERE blogId=#{blogId}")
+	List<Like> findByBlogId(Integer blogId);
+	
 	@Delete("DELETE FROM likes WHERE userId=#{userId} AND blogId=#{blogId}")
 	int deleteLike(Integer userId,Integer blogId);
+	
+	@Delete("DELETE FROM likes WHERE blogId=#{blogId}")
+	int deleteLikeByBlogId(Integer blogId);
 }

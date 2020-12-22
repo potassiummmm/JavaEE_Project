@@ -39,3 +39,8 @@
   }
 
 })(jQuery); // End of use strict
+
+function submit(){
+  var form = document.getElementById("sortMethod");
+  form.submit();
+}

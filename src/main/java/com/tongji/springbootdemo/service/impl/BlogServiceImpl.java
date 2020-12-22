@@ -23,6 +23,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public List<Blog> findByMostRecent(){
+        return blogMapper.findByMostRecent();
+    }
+
+    @Override
+    public List<Blog> findByMostFavored() {
+        return blogMapper.findByMostFavored();
+    }
+
+    @Override
     public List<Blog> findByAuthor(Integer authorId) {
         return blogMapper.findByAuthor(authorId);
     }
@@ -49,5 +59,15 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void updateLike(Integer like, Integer blogId) {
         blogMapper.updateLike(like,blogId);
+    }
+    
+    @Override
+    public void updateView(Integer view, Integer blogId) {
+        blogMapper.updateView(view,blogId);
+    }
+    
+    @Override
+    public int deleteBlog(Integer blogId) {
+        return blogMapper.deleteBlog(blogId);
     }
 }

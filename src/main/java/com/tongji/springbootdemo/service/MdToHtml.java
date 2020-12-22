@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class MdToHtml {
     public static String convert(String md) {
         MutableDataSet options = new MutableDataSet();
-
+        
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
 
@@ -29,4 +29,11 @@ public class MdToHtml {
         return htmlOutPut;
     }
 
+    
+    public static void main(String[] args) {
+        String aa = "&lt;";
+        String bb = MdToHtml.convert(aa);
+        System.out.println(bb);
+    }
 }
+
