@@ -45,4 +45,9 @@ public class BlogServiceImpl implements BlogService {
     public int addBlog(Integer privateIndex, Integer authorId,String title, String content, Integer like, Integer view, Timestamp date) {
         return blogMapper.addBlog(privateIndex, authorId, userMapper.findById(authorId).get(0).getNickname(), title, content, like, view, date);
     }
+    
+    @Override
+    public void updateLike(Integer like, Integer blogId) {
+        blogMapper.updateLike(like,blogId);
+    }
 }

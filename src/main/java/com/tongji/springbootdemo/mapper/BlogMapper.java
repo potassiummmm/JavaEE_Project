@@ -21,4 +21,7 @@ public interface BlogMapper {
 
     @Insert("INSERT INTO blogs(privateIndex,authorId,authorNickname,title,content,`like`,`view`,date) VALUES(#{privateIndex},#{authorId},#{authorNickname},#{title},#{content},#{like},#{view},#{date})")
     int addBlog(Integer privateIndex, Integer authorId, String authorNickname, String title, String content, Integer like, Integer view, Timestamp date);
+    
+    @Update("UPDATE blogs SET `like`=#{like} where blogId=#{blogId}")
+    void updateLike(Integer like,Integer blogId);
 }
