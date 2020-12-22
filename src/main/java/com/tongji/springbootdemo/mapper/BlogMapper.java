@@ -24,4 +24,7 @@ public interface BlogMapper {
     
     @Update("UPDATE blogs SET `like`=#{like} where blogId=#{blogId}")
     void updateLike(Integer like,Integer blogId);
+    
+    @Update("UPDATE blogs SET `view`=#{view} where blogId=#{blogId}")
+    void updateView(Integer view,Integer blogId);
 }

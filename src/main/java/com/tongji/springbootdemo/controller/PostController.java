@@ -43,8 +43,9 @@ public class PostController {
 
     @RequestMapping("/{blogId}")
     public String view(@PathVariable("blogId") Integer blogId, Model model){
-        List<Blog> blogs = blogService.findAll();
-        model.addAttribute("blog", blogs.get(blogId-1));
+        Blog blog=blogService.findById(blogId);
+        blogService.updateView(blog.getView()+1,blogId);
+        model.addAttribute("blog", blog);
         List<Comment> comments = commentService.findByBlogId(blogId);
         model.addAttribute("comments", comments);
         return "post";

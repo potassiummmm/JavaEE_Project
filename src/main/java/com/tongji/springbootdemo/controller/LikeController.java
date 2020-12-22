@@ -48,8 +48,7 @@ public class LikeController {
 	@RequestMapping( "/likeList/{blogId}")
 	public String likeList(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
-		Blog blog = blogService.findById(blogId);
-		List<Like> likes = likeService.findById(userId, blogId);
+		List<Like> likes = likeService.findByBlogId(blogId);
 		model.addAttribute("likes", likes);
 		return "likeList";
 	}

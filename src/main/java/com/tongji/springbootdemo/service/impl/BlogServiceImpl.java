@@ -50,4 +50,9 @@ public class BlogServiceImpl implements BlogService {
     public void updateLike(Integer like, Integer blogId) {
         blogMapper.updateLike(like,blogId);
     }
+    
+    @Override
+    public void updateView(Integer view, Integer blogId) {
+        blogMapper.updateView(view,blogId);
+    }
 }

@@ -17,4 +17,6 @@ public interface BlogService {
     void updateLike(Integer like,Integer blogId);
     
     int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view, Timestamp date);
+    
+    void updateView(Integer view,Integer blogId);
 }
