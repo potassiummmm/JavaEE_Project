@@ -2,6 +2,7 @@ package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.User;
+import com.tongji.springbootdemo.service.LikeService;
 import com.tongji.springbootdemo.service.UserService;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +25,49 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private LikeService likeService;
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model,HttpSession session){
+        if(session.getAttribute("userId")==null)
+        {
+            List<Blog> blogs = blogService.findByMostRecent();
+            model.addAttribute("blogs", blogs);
+            return "index";
+        }
+        Integer userId=(Integer)session.getAttribute("userId");
         List<Blog> blogs = blogService.findByMostRecent();
+        for (int i=0;i<blogs.size();i++){
+            if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+            {
+                blogs.get(i).setIsLike(true);
+            }
+            else
+                blogs.get(i).setIsLike(false);
+        }
         model.addAttribute("blogs", blogs);
         return "index";
     }
 
     @RequestMapping("/sorted")
-    public String sortedIndex(@RequestParam("method") String method, Model model){
+    public String sortedIndex(@RequestParam("method") String method, Model model,HttpSession session){
         List<Blog> blogs = null;
         if(method.equals("Order By Date")){
             blogs = blogService.findByMostRecent();
         }
         else{
             blogs = blogService.findByMostFavored();
+        }
+        Integer userId=(Integer) session.getAttribute("userId");
+        for (int i=0;i<blogs.size();i++){
+            if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+            {
+                blogs.get(i).setIsLike(true);
+            }
+            else
+                blogs.get(i).setIsLike(false);
         }
         model.addAttribute("blogs", blogs);
         model.addAttribute("method", method);

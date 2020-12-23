@@ -40,6 +40,14 @@ public class LikeController {
 			likeService.addLike(userId, nickname, blogId);
 		}
 		List<Blog> blogs = blogService.findByMostRecent();
+		for (int i=0;i<blogs.size();i++){
+			if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsLike(true);
+			}
+			else
+				blogs.get(i).setIsLike(false);
+		}
 		model.addAttribute("blogs", blogs);
 		return "index";
 	}
