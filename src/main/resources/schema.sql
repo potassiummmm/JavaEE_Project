@@ -1,17 +1,17 @@
 create database if not exists `JavaEE`;
 use JavaEE;
 
--- drop table if exists `users`;
+drop table if exists `users`;
 create table if not exists `users` (
   `userId` int NOT NULL AUTO_INCREMENT,
   `nickname` char(30) DEFAULT NULL,
   `email` char(30) DEFAULT NULL,
-  `password` char(30) DEFAULT NULL,
+  `password` char(128) DEFAULT NULL,
   `registrationTime` timestamp NOT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- drop table if exists `blogs`;
+drop table if exists `blogs`;
 create table if not exists `blogs` (
   `blogId` int NOT NULL AUTO_INCREMENT,
   `privateIndex` int NOT NULL,
@@ -25,7 +25,7 @@ create table if not exists `blogs` (
   PRIMARY KEY (`blogId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- drop table if exists `comments`;
+drop table if exists `comments`;
 create table if not exists `comments` (
   `blogId` int NOT NULL,
   `content` varchar(300) DEFAULT NULL,
@@ -34,7 +34,7 @@ create table if not exists `comments` (
   `date` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- drop table if exists `likes`;
+drop table if exists `likes`;
 create table if not exists `likes` (
     `userId` int NOT NULL,
     `nickname` varchar(30) DEFAULT NULL,

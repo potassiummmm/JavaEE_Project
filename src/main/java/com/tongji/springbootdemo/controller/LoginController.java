@@ -29,7 +29,7 @@ public class LoginController {
     private BlogServiceImpl blogService;
 
     @RequestMapping("/user/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session){
+    public String login(@RequestParam("email") String email, @RequestParam("hiddenPassword") String password, Model model, HttpSession session){
 
         if (userService.findByEmail(email) == null) {
             model.addAttribute("loginMsg", "The user does not exist!");

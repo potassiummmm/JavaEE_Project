@@ -19,7 +19,7 @@ public class RegisterController {
     private UserServiceImpl userService;
 
     @RequestMapping("/user/register")
-    public String login(@RequestParam("nickname") String nickname, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, Model model, HttpSession session){
+    public String login(@RequestParam("nickname") String nickname, @RequestParam("email") String email, @RequestParam("hiddenPassword") String password, @RequestParam("hiddenConfirmPassword") String confirmPassword, Model model, HttpSession session){
         if(StringUtils.isEmpty(nickname) || StringUtils.isEmpty(email) || StringUtils.isEmpty(password) || StringUtils.isEmpty(confirmPassword)){
             model.addAttribute("registerMsg","Please enter your nick name, e-mail address and password!");
             return "register";
