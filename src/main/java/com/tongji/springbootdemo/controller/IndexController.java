@@ -42,6 +42,7 @@ public class IndexController {
             blogs = blogService.findByMostFavored();
         }
         model.addAttribute("blogs", blogs);
+        model.addAttribute("method", method);
         return "index";
     }
 
