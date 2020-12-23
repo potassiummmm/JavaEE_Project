@@ -71,7 +71,11 @@ public class PostController {
         //TODO: Add model to show commentInvalidMsg
         if(!textModeration.isValid(comment)){
             model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
-            return "";
+            Blog blog = blogService.findById(blogId);
+            model.addAttribute("blog", blog);
+            List<Comment> comments = commentService.findByBlogId(blogId);
+            model.addAttribute("comments", comments);
+            return "post";
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);
@@ -98,7 +102,7 @@ public class PostController {
     }
 
     @RequestMapping("/deleteBlog/{blogId}")
-    public String sendBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
+    public String deleteBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
         starService.deleteStarByBlogId(blogId);
         likeService.deleteLikeByBlogId(blogId);
         blogService.deleteBlog(blogId);
