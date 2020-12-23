@@ -15,25 +15,35 @@ Final project of JavaEE course,Fall 2020,Tongji University
 
 ## System Functionalities
 
-### Register & Login & Logout
+- Register & Login & Logout
 
-### Send new blogs when login(support markdown syntax)
+- Send new blogs when login(support markdown syntax)
 
-### Comment blogs when login
+- Comment blogs when login
 
-### View all blogs in the index page, or view blogs sent by a particular author in his or hers about page
+- View comments of a blog
 
-### View comments of a blog
+- Like and Star blogs when login
 
-### Like and Star blogs when login
+- See who likes your blog
 
-### See who like your blog
-
-### Sort blogs on index page by date or like
+- Sort blogs on index page by date or like
 
 
 
 ## User Manual
+
+- Use nickname, e-mail address, password to register a new account, the password's length should longer than 7 characters and less than  17 characters.
+- After register, you can use the e-mail address and password to sign in.
+- Before login, there are only Home and Sign In button on home page.
+- You can see all blogs and comments as a visitor, but cannot send blogs, comment blogs, like blogs or star blogs.
+- You can choose the sorting method of the blogs in the home page, the default method is sort by date.
+- After login, you can do all actions mentioned before.
+- When sending blogs, you can use markdown syntax.
+- When sending blogs or writing comment, your submit will be checked. If your message contains sensitive words, your submission will fail.
+- After login, About button, which is your nick name,  and Send Blog button will be added to the home page, the Sign In button will be replaced by the Log Out button.
+- In About page, you can see the blogs you sent and the blogs you stared, you can also delete your blogs or stared blogs
+
 ## System Architecture and Component Design
 ## Database Design
 
