@@ -35,7 +35,7 @@ public class IndexController {
     @RequestMapping("/sorted")
     public String sortedIndex(@RequestParam("method") String method, Model model){
         List<Blog> blogs = null;
-        if(method.equals("Sort By Date")){
+        if(method.equals("Order By Date")){
             blogs = blogService.findByMostRecent();
         }
         else{

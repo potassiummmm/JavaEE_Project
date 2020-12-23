@@ -71,7 +71,7 @@
     <form role="form" th:action="@{/sorted}" id="sortMethod">
       <fieldset>
         <select onchange="submit()" name="method" class="selectpicker show-tick form-control" data-width="100px" data-live-search="true" style="height: auto; font-size: 24px">
-          <option selected="" style="font-size: 24px">Order By Date</option>
+          <option style="font-size: 24px">Order By Date</option>
           <option style="font-size: 24px">Order By Like</option>
         </select>
       </fieldset>
@@ -102,9 +102,9 @@
 
         <!--  Star Part -->
         <a th:href="@{'/star/' + ${blog.getBlogId()}}" th:unless="${session.currentUser == null}">
-          <i class="far fa-heart" style="color: lightgray"></i>
+          <i class="far fa-star" style="color: lightgray"></i></i>
         </a>
-        <i class="far fa-heart" style="color: lightgray" th:if="${session.currentUser == null}"></i>
+        <i class="far fa-star" style="color: lightgray" th:if="${session.currentUser == null}"></i>
         <span th:text="${blog.getStar()}" class="font-weight-normal"></span>
 
       </li>

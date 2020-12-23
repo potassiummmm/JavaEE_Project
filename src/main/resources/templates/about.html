@@ -37,7 +37,7 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/postBlog}" style="font-size:18px" th:unless="${session.currentUser == null}">Send Blog!</a>
           </li>
-          <li class="nav-item" th:if="${session.currentUser == user}">
+          <li class="nav-item" th:if="${session.currentUser == user.getNickname()}">
             <a class="nav-link" th:href="@{'/starList/'+${session.userId}}" style="font-size:18px" th:text="'My Star'">User</a>
           </li>
           <li class="nav-item" th:if="${session.currentUser == null}">
