@@ -45,6 +45,12 @@ Final project of JavaEE course,Fall 2020,Tongji University
 - In About page, you can see the blogs you sent and the blogs you stared, you can also delete your blogs or stared blogs
 
 ## System Architecture and Component Design
+
+- Dao layer to connect database
+- Service layer to offer business logic
+- Controller layer to deal with URL request , add models and return the View layer, which is responsible for interacting with users
+- 
+
 ## Database Design
 
 ###
