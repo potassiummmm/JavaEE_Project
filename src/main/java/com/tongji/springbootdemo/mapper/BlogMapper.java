@@ -25,8 +25,8 @@ public interface BlogMapper {
     @Select("SELECT * FROM blogs where authorId=#{authorId} order by date")
     List<Blog> findByAuthor(Integer authorId);
 
-    @Insert("INSERT INTO blogs(privateIndex,authorId,authorNickname,title,content,`like`,`view`,date) VALUES(#{privateIndex},#{authorId},#{authorNickname},#{title},#{content},#{like},#{view},#{date})")
-    int addBlog(Integer privateIndex, Integer authorId, String authorNickname, String title, String content, Integer like, Integer view, Timestamp date);
+    @Insert("INSERT INTO blogs(privateIndex,authorId,authorNickname,title,content,`like`,`view`,`star`,date) VALUES(#{privateIndex},#{authorId},#{authorNickname},#{title},#{content},#{like},#{view},#{star},#{date})")
+    int addBlog(Integer privateIndex, Integer authorId, String authorNickname, String title, String content, Integer like, Integer view,Integer star, Timestamp date);
     
     @Update("UPDATE blogs SET `like`=#{like} where blogId=#{blogId}")
     void updateLike(Integer like,Integer blogId);
