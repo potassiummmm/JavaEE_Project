@@ -39,9 +39,8 @@ public class LikeController {
 			String nickname = userService.findById(userId).getNickname();
 			likeService.addLike(userId, nickname, blogId);
 		}
-		List<Blog> blogss = blogService.findAll();
-		//Collection<Blog> blogs = blogDao.getBlogs();
-		model.addAttribute("blogs", blogss);
+		List<Blog> blogs = blogService.findByMostRecent();
+		model.addAttribute("blogs", blogs);
 		return "index";
 	}
 	

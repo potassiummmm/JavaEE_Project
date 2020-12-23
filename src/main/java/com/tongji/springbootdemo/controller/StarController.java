@@ -45,9 +45,8 @@ public class StarController {
 			blogService.updateStar(blog.getStar() + 1, blogId);
 			starService.addStar(userId, blogId);
 		}
-		List<Blog> blogss = blogService.findAll();
-		//Collection<Blog> blogs = blogDao.getBlogs();
-		model.addAttribute("blogs", blogss);
+		List<Blog> blogs = blogService.findByMostRecent();
+		model.addAttribute("blogs", blogs);
 		return "index";
 	}
 	
