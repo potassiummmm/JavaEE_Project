@@ -59,6 +59,13 @@ public class IndexController {
         return "about";
     }
 
+    @RequestMapping("/about/{userId}/addAvatar")
+    public String avatar(@PathVariable("userId") Integer userId, Model model, HttpSession session) {
+        User user=userService.findById(userId);
+        model.addAttribute("user",user);
+        return "postAvatar";
+    }
+
     @RequestMapping("/logOut")
     public String logOut(Model model, HttpSession session){
         session.removeAttribute("currentUser");
