@@ -26,7 +26,7 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="width: 100%">
     <div class="container">
         <div class="navbar-nav" id="navbarResponsive">
             <ul class="navbar-nav ml-auto list-unstyled" style="margin-top: 18px">
@@ -37,9 +37,9 @@
                     <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
                 </li>
                 <li class="nav-item" th:unless="${session.currentUser == null}">
-                    <a class="nav-link" th:href="@{/about}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+                    <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
                 </li>
-                <li class="nav-item" th:unless="${session.currentUser == null}">
+                <li class="nav-item" th:unless="${session.currentUser == null}" style="position: absolute; right: 7%;">
                     <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
                 </li>
             </ul>
@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>Share something with other!</h1>
+                    <h1>Share something with others!</h1>
                 </div>
             </div>
         </div>
