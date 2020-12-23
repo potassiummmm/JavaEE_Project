@@ -43,4 +43,5 @@
 function submit(){
   var form = document.getElementById("sortMethod");
   form.submit();
+  return true;
 }

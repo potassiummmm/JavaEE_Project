@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -26,7 +27,20 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model){
-        List<Blog> blogs = blogService.findAll();
+        List<Blog> blogs = blogService.findByMostRecent();
+        model.addAttribute("blogs", blogs);
+        return "index";
+    }
+
+    @RequestMapping("/sorted")
+    public String sortedIndex(@RequestParam("method") String method, Model model){
+        List<Blog> blogs = null;
+        if(method.equals("Sort By Date")){
+            blogs = blogService.findByMostRecent();
+        }
+        else{
+            blogs = blogService.findByMostFavored();
+        }
         model.addAttribute("blogs", blogs);
         return "index";
     }

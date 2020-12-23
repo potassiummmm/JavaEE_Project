@@ -44,9 +44,6 @@
             <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
           </li>
           <li class="nav-item" th:unless="${session.currentUser == null}">
-            <a class="nav-link" th:href="@{'/starList/'+${session.userId}}" style="font-size:18px" th:text="'My Star'">User</a>
-          </li>
-          <li class="nav-item" th:unless="${session.currentUser == null}">
           <li class="nav-item" th:unless="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
           </li>
@@ -71,9 +68,9 @@
   </header>
 
   <div class="container col-lg-3 col-md-offset-4 col-lg-offset-4col-xl-offset-4">
-    <form role="form" th:action="@{/}" id="sortMethod">
+    <form role="form" th:action="@{/sorted}" id="sortMethod">
       <fieldset>
-        <select onchange="submit()" class="selectpicker show-tick form-control" data-width="100px" data-live-search="true" style="height: auto; font-size: 24px">
+        <select onchange="submit()" name="method" class="selectpicker show-tick form-control" data-width="100px" data-live-search="true" style="height: auto; font-size: 24px">
           <option selected="" style="font-size: 24px">Order By Date</option>
           <option style="font-size: 24px">Order By Like</option>
         </select>
