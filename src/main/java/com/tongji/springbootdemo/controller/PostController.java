@@ -92,7 +92,7 @@ public class PostController {
         Timestamp date = new Timestamp(System.currentTimeMillis());
         Integer privateId=blogService.findByAuthor(authorId).size()+1;
         model.addAttribute("blogId", blogService.findAll().size());
-        blogService.addBlog(privateId,authorId,title,content, 0,0,date);
+        blogService.addBlog(privateId,authorId,title,content, 0,0,0,date);
         List<Blog> blogs = blogService.findAll();
         Blog blog = blogs.get(blogs.size()-1);
         String url = "redirect:/post/" + blog.getBlogId();

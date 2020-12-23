@@ -20,7 +20,7 @@ public interface BlogService {
     
     void updateLike(Integer like,Integer blogId);
     
-    int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view, Timestamp date);
+    int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view,Integer star, Timestamp date);
     
     void updateView(Integer view,Integer blogId);
     
