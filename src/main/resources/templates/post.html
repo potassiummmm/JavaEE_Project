@@ -10,15 +10,15 @@
 
   <title>TJ Blog</title>
 
-  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap CSS -->
   <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
 
   <!-- Custom fonts for this template -->
-  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-  <!-- Custom styles for this template -->
+  <!-- Custom styles-->
   <link th:href="@{/css/clean-blog.css}" rel="stylesheet">
 </head>
 
@@ -80,14 +80,13 @@
   </article>
 
   <hr>
-<!--  TODO : Need to be beautified-->
     <div th:text="'Please sign in to send comments!'" th:if="${session.currentUser == null}" class="container font-weight-bold text-center" style="font-size: 32px"></div>
     <div id="comment-form" class="container mt-5 mb-5" th:unless="${session.currentUser == null}">
       <form role="form" th:action="@{'/post/sendComment/' + ${session.userId} + '/' + ${blog.getBlogId()}}">
         <fieldset>
           <div class="font-weight-bold" style="font-size: 28px">Send a comment</div>
           <!--/*@thymesVar id="registerMsg" type=""*/-->
-          <p style="color: red" th:text="${commentMsg}" th:if="${not #strings.isEmpty(registerMsg)}"></p>
+          <p style="color: red" th:text="${commentInvalidMsg}" th:if="${not #strings.isEmpty(commentInvalidMsg)}"></p>
           <div class="form-group">
             <label for="commentContent"></label><textarea type="commentContent" name="commentContent" id="commentContent" class="form-control input-lg" placeholder="Comment here..."></textarea>
           </div>
@@ -99,9 +98,6 @@
         </fieldset>
       </form>
   </div>
-
-
-<!--  TODO : show commets-->
 
   <div class="container mt-5 mb-5">
     <div th:if="${#lists.isEmpty(comments)}">
@@ -115,11 +111,12 @@
       </li>
     </ul>
   </div>
+
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-  <!-- Custom scripts for this template -->
+  <!-- Custom scripts -->
   <script th:src="@{/js/clean-blog.min.js}"></script>
 
 </body>

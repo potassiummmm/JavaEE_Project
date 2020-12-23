@@ -59,9 +59,6 @@ public class IndexController {
         return "about";
     }
 
-    @RequestMapping("/contact")
-    public String contact(Model model, HttpSession session) { return "contact"; }
-
     @RequestMapping("/logOut")
     public String logOut(Model model, HttpSession session){
         session.removeAttribute("currentUser");

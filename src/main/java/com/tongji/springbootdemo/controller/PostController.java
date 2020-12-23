@@ -67,12 +67,12 @@ public class PostController {
     }
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId) {
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model) {
         //TODO: Add model to show commentInvalidMsg
-//        if(!textModeration.isValid(comment)){
-//            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
-//            return "";
-//        }
+        if(!textModeration.isValid(comment)){
+            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
+            return "";
+        }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);
         return "redirect:/post/{blogId}";

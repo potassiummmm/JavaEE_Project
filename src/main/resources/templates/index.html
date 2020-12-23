@@ -10,23 +10,24 @@
 
   <title>TJ Blog</title>
 
-  <!-- Bootstrap core CSS -->
+  <!-- Bootstrap styles -->
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link th:href="@{/css/all.min.css}" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-  <!-- Custom styles for this template -->
+
+  <!-- Custom fonts for this template -->
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+
+  <!-- Custom styles -->
   <link th:href="@{/css/clean-blog.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <div class="navbar-nav" id="navbarResponsive">
@@ -53,7 +54,7 @@
   </nav>
 <!--  <nav th:insert="fragments :: navbar"></nav>-->
 
-  <!-- Page Header -->
+  <!-- Header -->
   <header class="masthead" th:style="'background-image:url(' + @{/img/lib.jpg} + ');z-index: -1'">
     <div class="overlay"></div>
     <div class="container">
@@ -113,11 +114,8 @@
     </ul>
   </div>
 
-  <!-- Bootstrap core JavaScript -->
   <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
-  <!-- Custom scripts for this template -->
   <script th:src="@{/js/clean-blog.min.js}"></script>
   <script src="https://kit.fontawesome.com/4e8e203021.js" crossorigin="anonymous"></script>
 
