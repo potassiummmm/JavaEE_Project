@@ -5,6 +5,7 @@ import com.tongji.springbootdemo.model.Comment;
 import com.tongji.springbootdemo.model.Like;
 import com.tongji.springbootdemo.model.User;
 import com.tongji.springbootdemo.service.LikeService;
+import com.tongji.springbootdemo.service.StarService;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import com.tongji.springbootdemo.service.impl.CommentServiceImpl;
 import com.tongji.springbootdemo.service.impl.TextModerationImpl;
@@ -39,9 +40,13 @@ public class PostController {
     
     @Autowired
     private LikeService likeService;
+    
+    @Autowired
+    private StarService starService;
 
     @Autowired
     private TextModerationImpl textModeration;
+    
 
     @RequestMapping
     public String post(Model model) {
@@ -96,7 +101,7 @@ public class PostController {
     
     @RequestMapping("/deleteBlog/{blogId}")
     public String sendBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session){
-    
+        starService.deleteStarByBlogId(blogId);
         likeService.deleteLikeByBlogId(blogId);
         blogService.deleteBlog(blogId);
         

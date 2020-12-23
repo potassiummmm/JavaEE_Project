@@ -8,6 +8,10 @@ import java.util.List;
 public interface BlogService {
     List<Blog> findAll();
 
+    List<Blog> findByMostRecent();
+
+    List<Blog> findByMostFavored();
+
     List<Blog> findByAuthor(Integer authorId);
 
     Blog findById(Integer blogId);
@@ -21,4 +25,6 @@ public interface BlogService {
     void updateView(Integer view,Integer blogId);
     
     int deleteBlog(Integer blogId);
+    
+    void updateStar(Integer star,Integer blogId);
 }

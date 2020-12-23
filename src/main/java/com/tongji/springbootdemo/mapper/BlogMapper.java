@@ -13,6 +13,12 @@ public interface BlogMapper {
     @Select("SELECT * FROM blogs order by date")
     List<Blog> findAll();
 
+    @Select("SELECT * FROM blogs order by date DESC")
+    List<Blog> findByMostRecent();
+
+    @Select("SELECT * FROM blogs order by `like` DESC")
+    List<Blog> findByMostFavored();
+
     @Select("SELECT * FROM blogs where blogId=#{blogId} order by date")
     List<Blog> findById(Integer blogId);
 
@@ -30,4 +36,7 @@ public interface BlogMapper {
     
     @Delete("DELETE FROM blogs WHERE blogId=#{blogId}")
     int deleteBlog(Integer blogId);
+    
+    @Update("UPDATE blogs SET `star`=#{star} where blogId=#{blogId}")
+    void updateStar(Integer star,Integer blogId);
 }
