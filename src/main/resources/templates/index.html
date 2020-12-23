@@ -111,8 +111,13 @@
         <span th:text="${blog.getView()}" class="font-weight-normal"></span>
 
         <!--  Star Part -->
-        <a th:href="@{'/star/' + ${blog.getBlogId()}}" th:unless="${session.currentUser == null}">
-          <i class="far fa-star" style="color: lightgray"></i></i>
+        <a th:href="@{'/star/' + ${blog.getBlogId()}}" th:unless="${session.currentUser == null}"
+           th:if="${blog.getIsStar()==false}">
+          <i class="far fa-star" style="color: lightgray"></i>
+        </a>
+        <a th:href="@{'/star/' + ${blog.getBlogId()}}" th:unless="${session.currentUser == null}"
+           th:if="${blog.getIsStar()==true}">
+          <i class="fa fa-star"></i>
         </a>
         <i class="far fa-star" style="color: lightgray" th:if="${session.currentUser == null}"></i>
         <span th:text="${blog.getStar()}" class="font-weight-normal"></span>

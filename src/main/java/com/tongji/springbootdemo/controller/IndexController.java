@@ -3,6 +3,7 @@ package com.tongji.springbootdemo.controller;
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.User;
 import com.tongji.springbootdemo.service.LikeService;
+import com.tongji.springbootdemo.service.StarService;
 import com.tongji.springbootdemo.service.UserService;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class IndexController {
     
     @Autowired
     private LikeService likeService;
+    
+    @Autowired
+    private StarService starService;
 
     @RequestMapping("/")
     public String index(Model model,HttpSession session){
@@ -46,6 +50,13 @@ public class IndexController {
             }
             else
                 blogs.get(i).setIsLike(false);
+            
+            if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+            {
+                blogs.get(i).setIsStar(true);
+            }
+            else
+                blogs.get(i).setIsStar(false);
         }
         model.addAttribute("blogs", blogs);
         return "index";
@@ -68,6 +79,12 @@ public class IndexController {
             }
             else
                 blogs.get(i).setIsLike(false);
+            if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+            {
+                blogs.get(i).setIsStar(true);
+            }
+            else
+                blogs.get(i).setIsStar(false);
         }
         model.addAttribute("blogs", blogs);
         model.addAttribute("method", method);

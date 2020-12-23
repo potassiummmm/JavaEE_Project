@@ -4,6 +4,7 @@ import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.Like;
 import com.tongji.springbootdemo.service.BlogService;
 import com.tongji.springbootdemo.service.LikeService;
+import com.tongji.springbootdemo.service.StarService;
 import com.tongji.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class LikeController {
 	
 	@Autowired
 	private LikeService likeService;
+	
+	@Autowired
+	private StarService starService;
 	
 	@RequestMapping( "/like/{blogId}")
 	public String addLike(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
@@ -47,6 +51,12 @@ public class LikeController {
 			}
 			else
 				blogs.get(i).setIsLike(false);
+			if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsStar(true);
+			}
+			else
+				blogs.get(i).setIsStar(false);
 		}
 		model.addAttribute("blogs", blogs);
 		return "index";

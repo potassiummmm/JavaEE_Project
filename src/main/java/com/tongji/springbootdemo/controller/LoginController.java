@@ -4,6 +4,7 @@ import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.service.BlogService;
 import com.tongji.springbootdemo.service.LikeService;
+import com.tongji.springbootdemo.service.StarService;
 import com.tongji.springbootdemo.service.impl.BlogServiceImpl;
 import com.tongji.springbootdemo.service.impl.UserServiceImpl;
 import org.apache.catalina.connector.Response;
@@ -31,6 +32,9 @@ public class LoginController {
     
     @Autowired
     private LikeService likeService;
+    
+    @Autowired
+    private StarService starService;
 
     @RequestMapping("/user/login")
     public String login(@RequestParam("email") String email, @RequestParam("hiddenPassword") String password, Model model, HttpSession session){
@@ -52,6 +56,13 @@ public class LoginController {
                 }
                 else
                     blogs.get(i).setIsLike(false);
+                if((starService.findById((Integer) session.getAttribute("userId"),
+                        blogs.get(i).getBlogId())).isEmpty()==false)
+                {
+                    blogs.get(i).setIsStar(true);
+                }
+                else
+                    blogs.get(i).setIsStar(false);
             }
             model.addAttribute("blogs", blogs);
             return "index";
