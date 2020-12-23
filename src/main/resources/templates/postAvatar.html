@@ -41,6 +41,8 @@
                 </li>
                 <li class="nav-item" th:unless="${session.currentUser == null}" style="position: absolute; right: 7%;">
                     <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+                    <!--TODO: avatar-->
+                    <img src="favicon.ico" class="nav img-thumbnail" style="height: 32px; width: 32px">
                 </li>
             </ul>
         </div>

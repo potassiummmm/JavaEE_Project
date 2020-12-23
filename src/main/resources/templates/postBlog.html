@@ -37,10 +37,12 @@
                     <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
                 </li>
                 <li class="nav-item" th:unless="${session.currentUser == null}">
-                    <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+                    <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
                 </li>
                 <li class="nav-item" th:unless="${session.currentUser == null}" style="position: absolute; right: 7%;">
-                    <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
+                    <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
+                    <!--TODO: avatar-->
+                    <img src="favicon.ico" class="nav img-thumbnail" style="height: 32px; width: 32px">
                 </li>
             </ul>
         </div>

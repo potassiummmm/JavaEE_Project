@@ -46,6 +46,10 @@
           <li class="nav-item" th:unless="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
           </li>
+          <li class="nav-item" th:unless="${session.currentUser == null}" style="position: absolute; right: 7%">
+            <!--TODO: avatar-->
+            <img src="favicon.ico" class="nav img-thumbnail" style="height: 32px; width: 32px">
+          </li>
         </ul>
       </div>
     </div>
