@@ -36,4 +36,7 @@ public interface BlogMapper {
     
     @Delete("DELETE FROM blogs WHERE blogId=#{blogId}")
     int deleteBlog(Integer blogId);
+    
+    @Update("UPDATE blogs SET `star`=#{star} where blogId=#{blogId}")
+    void updateStar(Integer star,Integer blogId);
 }

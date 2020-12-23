@@ -70,4 +70,9 @@ public class BlogServiceImpl implements BlogService {
     public int deleteBlog(Integer blogId) {
         return blogMapper.deleteBlog(blogId);
     }
+    
+    @Override
+    public void updateStar(Integer star, Integer blogId) {
+        blogMapper.updateStar(star, blogId);
+    }
 }

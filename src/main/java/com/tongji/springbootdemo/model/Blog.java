@@ -21,8 +21,17 @@ public class Blog {
     private String content;
     private Integer like;
     private Integer view;
+    private Integer star;
     private Timestamp date;
-
+    
+    public Integer getStar() {
+        return star;
+    }
+    
+    public void setStar(Integer star) {
+        this.star = star;
+    }
+    
     public Integer getBlogId() {
         return blogId;
     }

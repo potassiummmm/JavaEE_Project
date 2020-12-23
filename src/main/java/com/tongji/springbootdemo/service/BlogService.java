@@ -25,4 +25,6 @@ public interface BlogService {
     void updateView(Integer view,Integer blogId);
     
     int deleteBlog(Integer blogId);
+    
+    void updateStar(Integer star,Integer blogId);
 }
