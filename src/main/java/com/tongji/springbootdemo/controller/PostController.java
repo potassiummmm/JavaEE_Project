@@ -37,16 +37,16 @@ public class PostController {
 
     @Autowired
     private UserServiceImpl userService;
-    
+
     @Autowired
     private LikeService likeService;
-    
+
     @Autowired
     private StarService starService;
 
     @Autowired
     private TextModerationImpl textModeration;
-    
+
 
     @RequestMapping
     public String post(Model model) {
@@ -57,9 +57,9 @@ public class PostController {
     }
 
     @RequestMapping("/{blogId}")
-    public String view(@PathVariable("blogId") Integer blogId, Model model){
-        Blog blog=blogService.findById(blogId);
-        blogService.updateView(blog.getView()+1,blogId);
+    public String view(@PathVariable("blogId") Integer blogId, Model model) {
+        Blog blog = blogService.findById(blogId);
+        blogService.updateView(blog.getView() + 1, blogId);
         model.addAttribute("blog", blog);
         List<Comment> comments = commentService.findByBlogId(blogId);
         model.addAttribute("comments", comments);
@@ -67,7 +67,7 @@ public class PostController {
     }
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
-    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId){
+    public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId) {
         //TODO: Add model to show commentInvalidMsg
 //        if(!textModeration.isValid(comment)){
 //            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
@@ -79,37 +79,35 @@ public class PostController {
     }
 
     @RequestMapping("/sendBlog/{authorId}")
-    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model){
-        //TODO: Add database service, use date.toString() to get date string(see main method in Blog.java)
-        if(!textModeration.isValid(title)){
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model) {
+        if (!textModeration.isValid(title)) {
             model.addAttribute("sentMsg", "The title contains sensitive words!");
             return "postBlog";
         }
-        if(!textModeration.isValid(content)){
+        if (!textModeration.isValid(content)) {
             model.addAttribute("sentMsg", "The content contains sensitive words!");
             return "postBlog";
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
-        Integer privateId=blogService.findByAuthor(authorId).size()+1;
+        Integer privateId = blogService.findByAuthor(authorId).size() + 1;
         model.addAttribute("blogId", blogService.findAll().size());
-        blogService.addBlog(privateId,authorId,title,content, 0,0,0,date);
+        blogService.addBlog(privateId, authorId, title, content, 0, 0, 0, date);
         List<Blog> blogs = blogService.findAll();
-        Blog blog = blogs.get(blogs.size()-1);
-        String url = "redirect:/post/" + blog.getBlogId();
-        return url;
+        Blog blog = blogs.get(blogs.size() - 1);
+        return "redirect:/post/" + blog.getBlogId();
     }
-    
+
     @RequestMapping("/deleteBlog/{blogId}")
-    public String sendBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session){
+    public String sendBlog(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
         starService.deleteStarByBlogId(blogId);
         likeService.deleteLikeByBlogId(blogId);
         blogService.deleteBlog(blogId);
-        
-        Integer userId=(Integer) session.getAttribute("userId");
-        User user=userService.findById(userId);
-        model.addAttribute("user",user);
+
+        Integer userId = (Integer) session.getAttribute("userId");
+        User user = userService.findById(userId);
+        model.addAttribute("user", user);
         model.addAttribute("blogs", blogService.findByAuthor(userId));
         return "about";
     }
-    
+
 }

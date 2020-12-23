@@ -28,12 +28,5 @@ public class MdToHtml {
         htmlOutPut = m.replaceAll("&lt;some tag&gt;");
         return htmlOutPut;
     }
-
-    
-    public static void main(String[] args) {
-        String aa = "&lt;";
-        String bb = MdToHtml.convert(aa);
-        System.out.println(bb);
-    }
 }
 
