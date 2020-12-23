@@ -45,9 +45,22 @@ public class StarController {
 			blogService.updateStar(blog.getStar() + 1, blogId);
 			starService.addStar(userId, blogId);
 		}
-		List<Blog> blogss = blogService.findAll();
-		//Collection<Blog> blogs = blogDao.getBlogs();
-		model.addAttribute("blogs", blogss);
+		List<Blog> blogs = blogService.findByMostRecent();
+		for (int i=0;i<blogs.size();i++){
+			if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsLike(true);
+			}
+			else
+				blogs.get(i).setIsLike(false);
+			if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsStar(true);
+			}
+			else
+				blogs.get(i).setIsStar(false);
+		}
+		model.addAttribute("blogs", blogs);
 		return "index";
 	}
 	

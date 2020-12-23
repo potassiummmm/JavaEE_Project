@@ -23,6 +23,24 @@ public class Blog {
     private Integer view;
     private Integer star;
     private Timestamp date;
+    private Boolean isLike;
+    private Boolean isStar;
+    
+    public void setIsStar(Boolean isStar) {
+        this.isStar = isStar;
+    }
+    
+    public Boolean getIsStar(){
+        return isStar;
+    }
+    
+    public void setIsLike(Boolean isLike) {
+        this.isLike = isLike;
+    }
+    
+    public Boolean getIsLike(){
+        return isLike;
+    }
     
     public Integer getStar() {
         return star;

@@ -4,6 +4,7 @@ import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.Like;
 import com.tongji.springbootdemo.service.BlogService;
 import com.tongji.springbootdemo.service.LikeService;
+import com.tongji.springbootdemo.service.StarService;
 import com.tongji.springbootdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class LikeController {
 	@Autowired
 	private LikeService likeService;
 	
+	@Autowired
+	private StarService starService;
+	
 	@RequestMapping( "/like/{blogId}")
 	public String addLike(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -39,9 +43,22 @@ public class LikeController {
 			String nickname = userService.findById(userId).getNickname();
 			likeService.addLike(userId, nickname, blogId);
 		}
-		List<Blog> blogss = blogService.findAll();
-		//Collection<Blog> blogs = blogDao.getBlogs();
-		model.addAttribute("blogs", blogss);
+		List<Blog> blogs = blogService.findByMostRecent();
+		for (int i=0;i<blogs.size();i++){
+			if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsLike(true);
+			}
+			else
+				blogs.get(i).setIsLike(false);
+			if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
+			{
+				blogs.get(i).setIsStar(true);
+			}
+			else
+				blogs.get(i).setIsStar(false);
+		}
+		model.addAttribute("blogs", blogs);
 		return "index";
 	}
 	
