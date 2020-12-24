@@ -16,6 +16,9 @@ public interface UserMapper {
     @Insert("INSERT INTO users(nickname,email,password,registrationTime) VALUES(#{nickname},#{email},#{password},#{registrationTime})")
     int addUser(String nickname, String email, String password, Timestamp registrationTime);
 
+    @Update("UPDATE users SET userImage=#{userImage} where userId=#{userId}")
+    boolean updateImage(Integer userId, String userImage);
+
     @Select("SELECT * FROM users where userId=#{userId}")
     List<User> findById(Integer userId);
 

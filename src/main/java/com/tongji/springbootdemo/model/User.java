@@ -12,6 +12,7 @@ public class User {
     private String email;
     private String password;
     private Timestamp registrationTime;
+    private String userImage;
 
     public User(String nickname, String email, String password) {
         this.nickname = nickname;
@@ -57,5 +58,13 @@ public class User {
 
     public void setRegistrationTime(Timestamp registrationTime) {
         this.registrationTime = registrationTime;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 }
