@@ -256,9 +256,21 @@ Final project of JavaEE course, Fall 2020, Tongji University
     - Return about page of a user
     - return Post Avatar page and offer upload function
     - Log out function
-
-
-## Database Design
+  - Login Controller
+    - Judge if the user email address exists, and if the password matches
+  - Register Controller
+    - Use interface in Service Layer to write information to database
+  - Post Controller
+    - View a particular blog
+    - Send blog or comment
+    - Delete blog
+  - Star Controller
+    - Star a blog
+    - Remove a star blog
+    - Show star list
+  - Like Controller
+    - Like a blog
+    - Show like list
 
 ## Database Design
 
@@ -269,9 +281,9 @@ Final project of JavaEE course, Fall 2020, Tongji University
 | userId | int | 30 | 1 |primary key,auto_increment|
 | nickname | char | 30 | hello ||
 | email | char | 30 | 123@qq.com ||
-| password | char | 128 | 0 | after md5 encryption |
+| password | char | 128 | 12345678 | after md5 encryption |
 | registrationTime | timestamp |  | 2020-12-24 15:59:55 | timezone:shanghai |
-| userImage | mediumtext |  | 0 | base64 |
+| userImage | mediumtext |  | afraid.jpg | base64 Image String |
 
 ### blogs
 
@@ -280,51 +292,40 @@ Final project of JavaEE course, Fall 2020, Tongji University
 | blogId | int |  | 1 |primary key,auto_increment|
 | privateIndex | int |  | 1 | the index of the author's blogs |
 | authorId | int | | 1 |  |
-| authorNickname | char | 128 | 0 |  |
+| authorNickname | char | 30 | Yun Ma |  |
 | title | char | 30 | hello |  |
-| content | varchar | Hello World! | 0 |  |
+| content | varchar |  300   | Hello World! |  |
 | like | int |  | 0 |  |
 | view | int |  | 0 |  |
 | star | int |  | 0 |  |
-| date | timestamp |  | 2020-12-24 15:59:55 |  |
+| date | timestamp |  | 2020-12-24 15:59:55 | timezone:shanghai |
 
 ### comments
-<!--
+
 | Field Name | Data Type | Length |Example| Note |
-| ------ | :------: | :------: | :------: | :------: |
-| userId | char | 30 | 1 |primary key,auto_increment|
-| nickname | char | 30 | hello |  |
-| email | char | 30 | 123@qq.com |  |
-| password | char | 128 | 0 | md5 encryption |
-| registrationTime | timestamp |  |  | timezone:shanghai |
-| userImage | mediumtext |  | 0 | base64 |
--->
+| :----: | :------: | :------: | :------: | :------: |
+| blogId | int |  | 1 ||
+| content | varchar | 300 | hello |  |
+| senderId | int |  | 1 |  |
+| senderNickname | char | 30 | Yun Ma |  |
+| date | timestamp |        | 2020-12-24 15:59:55 | timezone:shanghai |
+
+
 ### likes
 
-<!--
+
 | Field Name | Data Type | Length |Example| Note |
 | ------ | :------: | :------: | :------: | :------: |
-| userId | char | 30 | 1 |primary key,auto_increment|
-| nickname | char | 30 | hello |  |
-| email | char | 30 | 123@qq.com |  |
-| password | char | 128 | 0 | md5 encryption |
-| registrationTime | timestamp |  |  | timezone:shanghai |
-| userImage | mediumtext |  | 0 | base64 |
--->
+| userId | char | 30 | 1 ||
+| nickname | varchar | 30 | Ge Mao |  |
+| blogId | int | 30 | 1 |  |
 
 ### stars
 
-<!--
-
-| Field Name | Data Type | Length |Example| Note |
-| ------ | :------: | :------: | :------: | :------: |
-| userId | char | 30 | 1 |primary key,auto_increment|
-| nickname | char | 30 | hello |  |
-| email | char | 30 | 123@qq.com |  |
-| password | char | 128 | 0 | md5 encryption |
-| registrationTime | timestamp |  |  | timezone:shanghai |
-| userImage | mediumtext |  | 0 | base64 |
--->
+| Field Name | Data Type | Length | Example | Note |
+| :--------: | :-------: | :----: | :-----: | :--: |
+|   userId   |    int    |        |    1    |      |
+|   blogId   |    int    |        |    1    |      |
 
 ## Other Technical Details and/or Information
 - Blog formatting supports markdown syntax.

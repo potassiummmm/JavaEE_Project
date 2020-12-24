@@ -72,11 +72,11 @@ public class PostController {
     @RequestMapping("/sendComment/{authorId}/{blogId}")
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model) {
         if(!textModeration.isValid(comment)){
-            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
             Blog blog = blogService.findById(blogId);
             model.addAttribute("blog", blog);
             List<Comment> comments = commentService.findByBlogId(blogId);
             model.addAttribute("comments", comments);
+            model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
             return "redirect:/post/{blogId}";
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
