@@ -208,7 +208,7 @@ Final project of JavaEE course,Fall 2020,Tongji University
 
 - Star design, ordinary setters and getters are omitted
 
-  ```java
+  ```
   public class Star {
   	private int userId;
   	private int blogId;
@@ -216,6 +216,39 @@ Final project of JavaEE course,Fall 2020,Tongji University
   ```
 
   
+
+- Webpage design
+
+  - Index page
+
+    - Navigation bar, link to other pages, includes Home, Send Blog, About, Log Out, Sign In
+    - A form enable user to choose sort method of the blogs
+    - A list show all the blogs in given order
+
+  - Send blog page
+
+    - Can not be accessed before sign in
+    - A form, submit the title and content of a blog
+
+  - Detail page
+
+    - Display the information about a blog
+    - A list show all the comments under the blog
+    - If sign in, a form to submit the content of comment
+
+  - About page
+
+    - A link to Star List page, which show the blogs current user stared
+
+    - A list of blogs sent by the current user
+    - Delete blog button
+
+  - Login page & Register page
+
+    - A form to submit email and password
+    - In Register page, the form will send nickname and confirm password as well
+
+    
 
 ## Database Design
 
