@@ -41,8 +41,9 @@
                 </li>
                 <li class="nav-item" th:unless="${session.currentUser == null}" style="position: absolute; right: 7%;">
                     <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
-                    <!--TODO: avatar-->
-                    <img src="favicon.ico" class="nav img-thumbnail" style="height: 32px; width: 32px">
+                    <a class="nav-link" th:href="@{'/about/' + ${session.userId} + '/addAvatar'}">
+                        <img th:src="'data:image/png;base64,' + ${user.getUserImage()}" class="nav img-thumbnail" style="height: 32px; width: 32px">
+                    </a>
                 </li>
             </ul>
         </div>
@@ -68,7 +69,7 @@
 <div class="container">
     <div th:text="'Please sign in to send blogs!'" th:if="${session.currentUser == null}" class="font-weight-bold text-center mt-5 mb-5" style="font-size: 36px"></div>
     <div th:colspan="3" id="comment-form" class="container mt-5 mb-5" th:unless="${session.currentUser == null}">
-        <form role="form" th:action="@{'/post/sendBlog/' + ${session.userId}}">
+        <form role="form" th:action="@{'/about/' + ${session.userId} + '/addAvatar/submit'}" enctype="multipart/form-data" method="post">
             <fieldset>
                 <div class="font-weight-bold text-left" style="font-size: 36px">Upload your avatar!</div>
                 <h1></h1>

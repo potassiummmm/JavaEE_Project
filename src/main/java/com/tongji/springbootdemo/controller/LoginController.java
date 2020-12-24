@@ -48,21 +48,17 @@ public class LoginController {
             session.setAttribute("userEmail",email);
             session.setAttribute("currentUser",userService.findByEmail(email).getNickname());
             session.setAttribute("userId", userService.findByEmail(email).getUserId());
-            for (int i=0;i<blogs.size();i++){
-                if((likeService.findById((Integer) session.getAttribute("userId"),
-                        blogs.get(i).getBlogId())).isEmpty()==false)
-                {
-                    blogs.get(i).setIsLike(true);
-                }
-                else
-                    blogs.get(i).setIsLike(false);
-                if((starService.findById((Integer) session.getAttribute("userId"),
-                        blogs.get(i).getBlogId())).isEmpty()==false)
-                {
-                    blogs.get(i).setIsStar(true);
-                }
-                else
-                    blogs.get(i).setIsStar(false);
+            for (Blog blog : blogs) {
+                if (!(likeService.findById((Integer) session.getAttribute("userId"),
+                        blog.getBlogId())).isEmpty()) {
+                    blog.setIsLike(true);
+                } else
+                    blog.setIsLike(false);
+                if (!(starService.findById((Integer) session.getAttribute("userId"),
+                        blog.getBlogId())).isEmpty()) {
+                    blog.setIsStar(true);
+                } else
+                    blog.setIsStar(false);
             }
             model.addAttribute("blogs", blogs);
             return "index";

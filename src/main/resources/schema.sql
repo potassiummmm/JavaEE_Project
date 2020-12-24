@@ -1,7 +1,7 @@
 create database if not exists `JavaEE`;
 use JavaEE;
 
-drop table if exists `users`;
+-- drop table if exists `users`;
 create table if not exists `users` (
   `userId` int NOT NULL AUTO_INCREMENT,
   `nickname` char(30) DEFAULT NULL,
