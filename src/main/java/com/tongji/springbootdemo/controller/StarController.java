@@ -57,6 +57,7 @@ public class StarController {
 				value.setIsStar(false);
 		}
 		model.addAttribute("blogs", blogs);
+		model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
 		return "index";
 	}
 	
@@ -71,6 +72,7 @@ public class StarController {
 		User user=userService.findById(authorId);
 		model.addAttribute("user",user);
 		model.addAttribute("blogs", myStarBlog);
+		model.addAttribute("avatars", blogService.getBlogAvatars(myStarBlog));
 		return "starList";
 	}
 	
@@ -89,6 +91,7 @@ public class StarController {
 		User user=userService.findById(userId);
 		model.addAttribute("user",user);
 		model.addAttribute("blogs", myStarBlog);
+		model.addAttribute("avatars", blogService.getBlogAvatars(myStarBlog));
 		return "starList";
 	}
 }

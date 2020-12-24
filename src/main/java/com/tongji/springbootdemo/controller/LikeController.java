@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,6 +59,7 @@ public class LikeController {
 		model.addAttribute("blogs", blogs);
 		User usr = userService.findById(userId);
 		model.addAttribute("me", usr);
+		model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
 		return "index";
 	}
 	
@@ -68,6 +70,11 @@ public class LikeController {
 		model.addAttribute("likes", likes);
 		User usr = userService.findById(userId);
 		model.addAttribute("me", usr);
+		List<Blog> blogs = new ArrayList<>();
+		for (Like like : likes) {
+			blogs.add(blogService.findById(like.getBlogId()));
+		}
+		model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
 		return "likeList";
 	}
 }

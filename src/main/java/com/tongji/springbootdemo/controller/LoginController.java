@@ -62,7 +62,7 @@ public class LoginController {
             }
             model.addAttribute("blogs", blogs);
             model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
-            return "/";
+            return "redirect:/index";
         }
         else {
             model.addAttribute("loginMsg", "Wrong email address or password!");
