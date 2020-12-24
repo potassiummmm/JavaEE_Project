@@ -57,7 +57,165 @@ Final project of JavaEE course,Fall 2020,Tongji University
 
 ### Component Design
 
+- User design, ordinary setters and getters are omitted
 
+  - Field userId  is unique, used as the primary key
+  - Field email is unique, it will be checked while registering an account
+
+  ```
+  public class User {
+      private Integer userId;
+      private String nickname;
+      private String email;
+      private String password;
+      private Timestamp registrationTime;
+  
+      public User(String nickname, String email, String password) {
+          this.nickname = nickname;
+          this.email = email;
+          this.password = password;
+      }
+  }
+  ```
+
+  
+
+- Blog design, ordinary setters and getters are omitted
+
+  - Field blogId is unique, used as the primary key
+  - Field authorId and authorNickname store author information
+  - Field title, content, like, view, star, date store the information about a blog
+  - Field isLike and isStar show whether this blog is liked or stared by a particular user
+
+  ```java
+  public class Blog {
+      private Integer blogId;
+      private Integer authorId;
+      private String authorNickname;
+      private Integer privateIndex;
+      private String title;
+      private String content;
+      private Integer like;
+      private Integer view;
+      private Integer star;
+      private Timestamp date;
+      private Boolean isLike;
+      private Boolean isStar;
+  
+      public String getContent() {
+          String h5content = MdToHtml.convert(content);
+          return h5content;
+      }
+  
+      public String getFormattedTime() {
+          long interval = System.currentTimeMillis() - date.getTime();
+          StringBuilder sb = new StringBuilder();
+          if(interval < 1000 * 60){
+              sb.append("just now");
+          }
+          else if (interval < 1000 * 3600) {
+              sb.append(interval / 60000);
+              if(interval < 120000){
+                  sb.append(" minute ago");
+              }
+              else{
+                  sb.append(" minutes ago");
+              }
+          }
+          else if (interval < 1000 * 3600 * 24) {
+              sb.append(interval / 3600000);
+              if(interval < 7200000){
+                  sb.append(" hour ago");
+              }
+              else{
+                  sb.append(" hours ago");
+              }
+          }
+          else{
+              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+              sb.append(dateFormat.format(date));
+          }
+          return sb.toString();
+      }
+  }
+  ```
+
+  
+
+- Comment design, ordinary setters and getters are omitted
+
+  - Field commentId is unique, used as the primary key
+  - Field blogId show the blog which this comment was sent to
+  - Field content show the content of the comment, date show the send time of a comment
+  - Field senderId and senderNickname show information about the user who sent the blog
+
+  ```java
+  public class Comment {
+      private Integer commentId;
+      private Integer blogId;
+      private String content;
+      private Integer senderId;
+      private String senderNickname;
+      private Timestamp date;
+      
+  	public String getFormattedTime() {
+          long interval = System.currentTimeMillis() - date.getTime();
+          StringBuilder sb = new StringBuilder();
+          if(interval < 1000 * 60){
+              sb.append("just now");
+          }
+          else if (interval < 1000 * 3600) {
+              sb.append(interval / 60000);
+              if(interval < 120000){
+                  sb.append(" minute ago");
+              }
+              else{
+                  sb.append(" minutes ago");
+              }
+          }
+          else if (interval < 1000 * 3600 * 24) {
+              sb.append(interval / 3600000);
+              if(interval < 7200000){
+                  sb.append(" hour ago");
+              }
+              else{
+                  sb.append(" hours ago");
+              }
+          }
+          else {
+              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+              sb.append(dateFormat.format(date));
+          }
+          return sb.toString();
+      }
+  }
+  ```
+
+  
+
+- Like design, ordinary setters and getters are omitted
+
+  ```java
+  public class Like
+  {
+  	private int userId;
+  	private String nickname;
+  	private int blogId;
+  }
+  ```
+
+  
+
+- Star design, ordinary setters and getters are omitted
+
+  ```java
+  public class Star {
+  	private int userId;
+  	private int blogId;
+  }
+  ```
+
+  
 
 ## Database Design
 
