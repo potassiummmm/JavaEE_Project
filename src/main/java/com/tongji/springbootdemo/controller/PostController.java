@@ -77,7 +77,7 @@ public class PostController {
             model.addAttribute("blog", blog);
             List<Comment> comments = commentService.findByBlogId(blogId);
             model.addAttribute("comments", comments);
-            return "post";
+            return "redirect:/post/{blogId}";
         }
         Timestamp date = new Timestamp(System.currentTimeMillis());
         commentService.addComment(blogId, comment, authorId, date);

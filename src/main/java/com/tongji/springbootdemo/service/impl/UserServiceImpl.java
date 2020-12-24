@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateImage(userId, base64Image);
     }
 
+    public boolean updateImageByString(Integer userId, String avatar) {
+        return userMapper.updateImage(userId, avatar);
+    }
+
     public User findById(Integer userId) {
         if (userMapper.findById(userId).isEmpty()) {
             return null;

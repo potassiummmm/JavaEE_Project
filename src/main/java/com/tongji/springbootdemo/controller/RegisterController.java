@@ -1,20 +1,16 @@
 package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.service.impl.UserServiceImpl;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
-import java.io.*;
 import java.sql.Timestamp;
-import java.util.Base64;
 
 
 
@@ -42,7 +38,7 @@ public class RegisterController {
         }
         else{
             userService.addUser(nickname,email,password,new Timestamp(System.currentTimeMillis()));
-            userService.findByEmail(email).setUserImage(defaultImage);
+            userService.updateImageByString(userService.findByEmail(email).getUserId(), defaultImage);
             model.addAttribute("successMsg", "Register successfully! Please login!");
             return "login";
         }
