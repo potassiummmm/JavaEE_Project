@@ -44,6 +44,8 @@
             <a class="nav-link" th:href="@{/login}" style="font-size:18px">Sign In!</a>
           </li>
           <li class="nav-item" th:unless="${session.currentUser == null}">
+            <a class="nav-link" th:href="@{'/starList/'+${session.userId}}" style="font-size:18px" th:text="'My Stars'">User</a>
+          </li>
           <li class="nav-item" th:unless="${session.currentUser == null}">
             <a class="nav-link" th:href="@{/logOut}" style="font-size:18px" th:text="'Log out'">Log out</a>
           </li>
