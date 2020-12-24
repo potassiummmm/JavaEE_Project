@@ -1,6 +1,6 @@
 package com.tongji.springbootdemo.service;
 
-public interface MdToHtml {
+public interface MdToHtmlService {
     String convert(String md);
 }
 

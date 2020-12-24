@@ -6,9 +6,9 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
 #### Team Members:
 
-| Full Name | Matriculation Number | Contact Number | email address |
+| Full Name | Matriculation Number | Contact Number | Email Address |
 | ------ | :------: | :------: | :------: |
-| Chenwei Ruan | 1850061 |||
+| Chenwei Ruan | 1850061 |  |  |
 | Zhichen Ren | 1850091 | 13917219912 | 1337795211@qq.com |
 | Zhengyi Zhuo | 1850384 | 19946254157 | zhuozhengyi@icloud.com |
 | Hansong Zhou | 1852612 | 18897958786 | 1574996073@qq.com |
@@ -53,7 +53,67 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
 ## Database Design
 
-###
+### users
+
+| Field Name | Data Type | Length |Example| Note |
+| ------ | :------: | :------: | :------: | :------: |
+| userId | int | 30 | 1 |primary key,auto_increment|
+| nickname | char | 30 | hello ||
+| email | char | 30 | 123@qq.com ||
+| password | char | 128 | 0 | after md5 encryption |
+| registrationTime | timestamp |  | 2020-12-24 15:59:55 | timezone:shanghai |
+| userImage | mediumtext |  | 0 | base64 |
+
+### blogs
+
+| Field Name | Data Type | Length |Example| Note |
+| ------ | :------: | :------: | :------: | :------: |
+| blogId | int |  | 1 |primary key,auto_increment|
+| privateIndex | int |  | 1 | the index of the author's blogs |
+| authorId | int | | 1 |  |
+| authorNickname | char | 128 | 0 |  |
+| title | char | 30 | hello |  |
+| content | varchar | Hello World! | 0 |  |
+| like | int |  | 0 |  |
+| view | int |  | 0 |  |
+| star | int |  | 0 |  |
+| date | timestamp |  | 2020-12-24 15:59:55 |  |
+
+### comments
+<!--
+| Field Name | Data Type | Length |Example| Note |
+| ------ | :------: | :------: | :------: | :------: |
+| userId | char | 30 | 1 |primary key,auto_increment|
+| nickname | char | 30 | hello |  |
+| email | char | 30 | 123@qq.com |  |
+| password | char | 128 | 0 | md5 encryption |
+| registrationTime | timestamp |  |  | timezone:shanghai |
+| userImage | mediumtext |  | 0 | base64 |
+-->
+### likes
+
+<!--
+| Field Name | Data Type | Length |Example| Note |
+| ------ | :------: | :------: | :------: | :------: |
+| userId | char | 30 | 1 |primary key,auto_increment|
+| nickname | char | 30 | hello |  |
+| email | char | 30 | 123@qq.com |  |
+| password | char | 128 | 0 | md5 encryption |
+| registrationTime | timestamp |  |  | timezone:shanghai |
+| userImage | mediumtext |  | 0 | base64 |
+-->
+### stars
+
+<!--
+| Field Name | Data Type | Length |Example| Note |
+| ------ | :------: | :------: | :------: | :------: |
+| userId | char | 30 | 1 |primary key,auto_increment|
+| nickname | char | 30 | hello |  |
+| email | char | 30 | 123@qq.com |  |
+| password | char | 128 | 0 | md5 encryption |
+| registrationTime | timestamp |  |  | timezone:shanghai |
+| userImage | mediumtext |  | 0 | base64 |
+-->
 
 ## Other Technical Details and/or Information
 - Blog formatting supports markdown syntax.

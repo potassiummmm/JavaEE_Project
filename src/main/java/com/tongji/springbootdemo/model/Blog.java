@@ -1,14 +1,12 @@
 package com.tongji.springbootdemo.model;
 
 
-import com.tongji.springbootdemo.service.impl.MdToHtmlImpl;
+import com.tongji.springbootdemo.service.impl.MdToHtmlServiceImpl;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -91,7 +89,7 @@ public class Blog {
     }
 
     public String getContent() {
-        MdToHtmlImpl mdToHtml = new MdToHtmlImpl();
+        MdToHtmlServiceImpl mdToHtml = new MdToHtmlServiceImpl();
         return mdToHtml.convert(content);
     }
 
