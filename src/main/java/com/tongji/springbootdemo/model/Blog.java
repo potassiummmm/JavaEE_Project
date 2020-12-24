@@ -3,12 +3,10 @@ package com.tongji.springbootdemo.model;
 
 import com.tongji.springbootdemo.service.impl.MdToHtmlImpl;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
