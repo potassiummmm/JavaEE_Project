@@ -44,6 +44,7 @@ public class IndexController {
         {
             List<Blog> blogs = blogService.findByMostRecent();
             model.addAttribute("blogs", blogs);
+            model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
             return "index";
         }
         Integer userId=(Integer)session.getAttribute("userId");
@@ -88,6 +89,7 @@ public class IndexController {
                 blog.setIsStar(false);
         }
         model.addAttribute("blogs", blogs);
+        model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
         model.addAttribute("method", method);
         User usr = userService.findById(userId);
         model.addAttribute("me", usr);
