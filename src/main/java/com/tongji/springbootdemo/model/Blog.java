@@ -1,7 +1,7 @@
 package com.tongji.springbootdemo.model;
 
 
-import com.tongji.springbootdemo.service.impl.MdToHtmlImpl;
+import com.tongji.springbootdemo.service.impl.MdToHtmlServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -89,7 +89,7 @@ public class Blog {
     }
 
     public String getContent() {
-        MdToHtmlImpl mdToHtml = new MdToHtmlImpl();
+        MdToHtmlServiceImpl mdToHtml = new MdToHtmlServiceImpl();
         return mdToHtml.convert(content);
     }
 

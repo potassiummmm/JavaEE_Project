@@ -30,7 +30,7 @@ public class IndexController {
     private BlogServiceImpl blogService;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     
     @Autowired
     private LikeService likeService;
