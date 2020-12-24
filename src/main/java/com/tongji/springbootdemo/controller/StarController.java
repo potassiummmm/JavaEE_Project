@@ -62,16 +62,16 @@ public class StarController {
 	}
 	
 	@RequestMapping( "/starList/{authorId}")
-	public String starList(@PathVariable("authorId") Integer authorId,Model model, HttpSession session) {
+	public String starList(@PathVariable("authorId") Integer authorId, Model model, HttpSession session) {
 		List<Star> stars = starService.findByUserId(authorId);
 		List<Blog> myStarBlog=new ArrayList<>();
-		for (Star star:stars
-		) {
+		for (Star star:stars) {
 			myStarBlog.add(blogService.findById(star.getBlogId()));
 		}
 		User user=userService.findById(authorId);
 		model.addAttribute("user",user);
 		model.addAttribute("blogs", myStarBlog);
+		System.out.println(myStarBlog.size());
 		model.addAttribute("avatars", blogService.getBlogAvatars(myStarBlog));
 		return "starList";
 	}
@@ -82,13 +82,12 @@ public class StarController {
 		Blog blog=blogService.findById(blogId);
 		starService.deleteStar(userId,blogId);
 		blogService.updateStar(blog.getStar() - 1, blogId);
-		List<Star> stars=starService.findByUserId(userId);
-		List<Blog> myStarBlog=new ArrayList<>();
-		for (Star star:stars
-		) {
+		List<Star> stars = starService.findByUserId(userId);
+		List<Blog> myStarBlog = new ArrayList<>();
+		for (Star star:stars) {
 			myStarBlog.add(blogService.findById(star.getBlogId()));
 		}
-		User user=userService.findById(userId);
+		User user = userService.findById(userId);
 		model.addAttribute("user",user);
 		model.addAttribute("blogs", myStarBlog);
 		model.addAttribute("avatars", blogService.getBlogAvatars(myStarBlog));
