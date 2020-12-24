@@ -47,7 +47,7 @@
             <a class="nav-link" th:href="@{'/about/' + ${session.userId}}" style="font-size:18px" th:text="${session.currentUser}">User</a>
           </li>
           <li>
-            <a class="nav-link" th:href="@{'/about/' + ${session.userId} + '/addAvatar'}">
+            <a class="nav-link" th:href="@{'/about/' + ${session.userId} + '/addAvatar'}" th:unless="${session.currentUser == null}">
               <img th:src="'data:image/png;base64,' + ${me.getUserImage()}" style="width: 40px; height: 40px; border-radius:50%; border: 3px solid #0b2e13;">
             </a>
           </li>
