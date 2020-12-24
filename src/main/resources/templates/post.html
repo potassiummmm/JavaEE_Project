@@ -64,7 +64,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <div th:text="${blog.getTitle()}" style="font-size: 72px">Title</div>
-            <a th:href="@{'about/' + ${blog.getAuthorId()}}" style="float: left"> <img th:src="'data:image/png;base64,' + ${avatar}" style="width: 64px; height: 64px; border-radius: 50%; border: 5px solid #0b2e13"></a>
+            <a th:href="@{'/about/' + ${blog.getAuthorId()}}" style="float: left"> <img th:src="'data:image/png;base64,' + ${avatar}" style="width: 64px; height: 64px; border-radius: 50%; border: 5px solid #0b2e13"></a>
             <a th:text="${blog.getAuthorNickname()}" style="font-size: 48px; color: white; position: relative; left: 2%" th:href="@{'/about/' + ${blog.getAuthorId()}}" >Author Name</a>
             <div th:text="${blog.getFormattedTime()}" style="font-size: 48px">Time</div>
           </div>
