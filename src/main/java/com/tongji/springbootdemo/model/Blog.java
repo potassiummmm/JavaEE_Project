@@ -146,7 +146,7 @@ public class Blog {
             }
         }
         else{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             sb.append(dateFormat.format(date));
         }
         return sb.toString();
