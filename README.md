@@ -248,7 +248,12 @@ Final project of JavaEE course,Fall 2020,Tongji University
     - A form to submit email and password
     - In Register page, the form will send nickname and confirm password as well
 
-    
+- Controller design
+
+  - Index Controller
+    - Return index page
+
+  
 
 ## Database Design
 
