@@ -63,6 +63,7 @@ public class IndexController {
         User usr = userService.findById(userId);
         model.addAttribute("me", usr);
         model.addAttribute("blogs", blogs);
+        model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
         return "index";
     }
 
