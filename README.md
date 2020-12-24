@@ -6,9 +6,9 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
 #### Team Members:
 
-| Full Name | Matriculation Number | Contact Number | email address |
+| Full Name | Matriculation Number | Contact Number | Email Address |
 | ------ | :------: | :------: | :------: |
-| Chenwei Ruan | 1850061 |||
+| Chenwei Ruan | 1850061 |18016279837|1763244792@qq.com|
 | Zhichen Ren | 1850091 | 13917219912 | 1337795211@qq.com |
 | Zhengyi Zhuo | 1850384 | 19946254157 | zhuozhengyi@icloud.com |
 | Hansong Zhou | 1852612 | 18897958786 | 1574996073@qq.com |
@@ -34,17 +34,51 @@ Final project of JavaEE course, Fall 2020, Tongji University
 ## User Manual
 
 - Use nickname, e-mail address, password to register a new account, the password's length should longer than 7 characters and less than  17 characters.
+
 - After register, you can use the e-mail address and password to sign in.
+
 - Before login, there are only Home and Sign In button on home page.
+
 - You can see all blogs and comments as a visitor, but cannot send blogs, comment blogs, like blogs or star blogs.
+
 - You can choose the sorting method of the blogs in the home page, the default method is sort by date.
+
 - After login, you can do all actions mentioned before.
+
 - When sending blogs, you can use markdown syntax.
+
 - When sending blogs or writing comment, your submit will be checked. If your message contains sensitive words, your submission will fail.
+
 - After login, About button, which is your nick name,  and Send Blog button will be added to the home page, the Sign In button will be replaced by the Log Out button.
+
 - In About page, you can see the blogs you sent and the blogs you stared, you can also delete your blogs or stared blogs
 
+    
+
 ## System Architecture and Component Design
+
+```mermaid
+graph TD
+
+B[Service]
+C[Controller]
+D[Service/ServiceImpl]
+
+G[View]
+K[Model]
+H[Mybatis]
+I[Spring MVC]
+I-->B-->J[DAO]
+K-->D
+G-->D
+C-->D
+D-->H
+
+
+
+```
+
+
 
 ### System Architecture
 
@@ -53,7 +87,7 @@ Final project of JavaEE course, Fall 2020, Tongji University
 - Design View Layer to show information to users
 - Design Controller Layer to deal with URL requests
   - Use interface in Service Layer to manipulate database
-  - Add object to View Layer
+  - Add an object to View Layer
 
 ### Component Design
 
@@ -227,7 +261,7 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
   - Send blog page
 
-    - Can not be accessed before sign in
+    - Cannot be accessed before sign in
     - A form, submit the title and content of a blog
 
   - Detail page
@@ -246,14 +280,14 @@ Final project of JavaEE course, Fall 2020, Tongji University
   - Login page & Register page
 
     - A form to submit email and password
-    - In Register page, the form will send nickname and confirm password as well
+    - In Register page, the form will send nickname and confirm the password as well
 
 - Controller design
 
   - Index Controller
     - Return index page
     - Return index page that blogs are sorted in the given order
-    - Return about page of a user
+    - Return the about page of a user
     - return Post Avatar page and offer upload function
     - Log out function
   - Login Controller
@@ -262,7 +296,7 @@ Final project of JavaEE course, Fall 2020, Tongji University
     - Use interface in Service Layer to write information to database
   - Post Controller
     - View a particular blog
-    - Send blog or comment
+    - Send blogs or comments
     - Delete blog
   - Star Controller
     - Star a blog
@@ -316,20 +350,18 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
 | Field Name | Data Type | Length |Example| Note |
 | ------ | :------: | :------: | :------: | :------: |
-| userId | char | 30 | 1 ||
+| userId | char | 30 | 1 |  |
 | nickname | varchar | 30 | Ge Mao |  |
 | blogId | int | 30 | 1 |  |
 
 ### stars
 
 | Field Name | Data Type | Length | Example | Note |
-| :--------: | :-------: | :----: | :-----: | :--: |
+| :--------: | :-------: | :------: | :------: | :------: |
 |   userId   |    int    |        |    1    |      |
 |   blogId   |    int    |        |    1    |      |
 
-## Other Technical Details and/or Information
-- Blog formatting supports markdown syntax.
-
 
 ## Other Technical Details and/or Information
 - Blog formatting supports markdown syntax.
+- Blog and comment will be checked by text moderation service provided by Tencent Cloud
