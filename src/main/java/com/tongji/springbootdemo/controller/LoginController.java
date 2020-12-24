@@ -2,6 +2,7 @@ package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.mapper.*;
 import com.tongji.springbootdemo.model.Blog;
+import com.tongji.springbootdemo.model.User;
 import com.tongji.springbootdemo.service.BlogService;
 import com.tongji.springbootdemo.service.LikeService;
 import com.tongji.springbootdemo.service.StarService;
@@ -60,9 +61,11 @@ public class LoginController {
                 } else
                     blog.setIsStar(false);
             }
+            User usr = userService.findByEmail(email);
+            model.addAttribute("me", usr);
             model.addAttribute("blogs", blogs);
             model.addAttribute("avatars", blogService.getBlogAvatars(blogs));
-            return "redirect:/index";
+            return "index";
         }
         else {
             model.addAttribute("loginMsg", "Wrong email address or password!");
