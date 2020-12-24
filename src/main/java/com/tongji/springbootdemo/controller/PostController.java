@@ -57,18 +57,20 @@ public class PostController {
     }
 
     @RequestMapping("/{blogId}")
-    public String view(@PathVariable("blogId") Integer blogId, Model model) {
+    public String view(@PathVariable("blogId") Integer blogId, Model model, HttpSession session) {
         Blog blog = blogService.findById(blogId);
         blogService.updateView(blog.getView() + 1, blogId);
         model.addAttribute("blog", blog);
         List<Comment> comments = commentService.findByBlogId(blogId);
         model.addAttribute("comments", comments);
+        User usr = userService.findById((Integer) session.getAttribute("userId"));
+        model.addAttribute("me", usr);
+        model.addAttribute("avatar", blogService.getBlogAuthorAvatar(blog.getBlogId()));
         return "post";
     }
 
     @RequestMapping("/sendComment/{authorId}/{blogId}")
     public String addComment(@RequestParam("commentContent") String comment, @PathVariable("authorId") Integer authorId, @PathVariable("blogId") Integer blogId, Model model) {
-        //TODO: Add model to show commentInvalidMsg
         if(!textModeration.isValid(comment)){
             model.addAttribute("commentInvalidMsg", "The comment contains sensitive words!");
             Blog blog = blogService.findById(blogId);
@@ -83,7 +85,7 @@ public class PostController {
     }
 
     @RequestMapping("/sendBlog/{authorId}")
-    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model) {
+    public String sendBlog(@RequestParam("blogTitle") String title, @RequestParam("blogContent") String content, @PathVariable("authorId") Integer authorId, Model model, HttpSession session) {
         if (!textModeration.isValid(title)) {
             model.addAttribute("sentMsg", "The title contains sensitive words!");
             return "postBlog";
@@ -98,6 +100,7 @@ public class PostController {
         blogService.addBlog(privateId, authorId, title, content, 0, 0, 0, date);
         List<Blog> blogs = blogService.findAll();
         Blog blog = blogs.get(blogs.size() - 1);
+        model.addAttribute("me", userService.findById(authorId));
         return "redirect:/post/" + blog.getBlogId();
     }
 

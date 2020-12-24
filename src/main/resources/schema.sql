@@ -8,6 +8,7 @@ create table if not exists `users` (
   `email` char(30) DEFAULT NULL,
   `password` char(128) DEFAULT NULL,
   `registrationTime` timestamp NOT NULL,
+  `userImage` mediumtext DEFAULT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

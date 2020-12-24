@@ -10,13 +10,13 @@
         {
             var pwd = document.getElementById('password').value;
             var confirm = document.getElementById('confirmPassword').value;
-            if (pwd.length > 16 || confirm.length > 16)
+            if (pwd.length > 16)
             {
                 document.getElementById('register').disable = true;
                 document.getElementById('hint').innerText = "Password too long";
                 return false;
             }
-            if (pwd.length < 8 || confirm.length < 8) {
+            if (pwd.length < 8) {
                 document.getElementById('register').disable = true;
                 document.getElementById('hint').innerText = "Password too short";
                 return false;
@@ -37,7 +37,7 @@
         var password = document.getElementById("password");
         var confirmPassword = document.getElementById("confirmPassword");
         var hiddenPassword = document.getElementById("hiddenPassword");
-        var hiddenConfirmPassword = document.getElementById("hiddenConfirmPassword")
+        var hiddenConfirmPassword = document.getElementById("hiddenConfirmPassword");
         //TODO: judge whether the password is valid
         hiddenPassword.value = md5(password.value);
         hiddenConfirmPassword.value = md5(confirmPassword.value);

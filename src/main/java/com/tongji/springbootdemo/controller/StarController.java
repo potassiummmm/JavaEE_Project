@@ -46,19 +46,15 @@ public class StarController {
 			starService.addStar(userId, blogId);
 		}
 		List<Blog> blogs = blogService.findByMostRecent();
-		for (int i=0;i<blogs.size();i++){
-			if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
-			{
-				blogs.get(i).setIsLike(true);
-			}
-			else
-				blogs.get(i).setIsLike(false);
-			if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
-			{
-				blogs.get(i).setIsStar(true);
-			}
-			else
-				blogs.get(i).setIsStar(false);
+		for (Blog value : blogs) {
+			if (!(likeService.findById(userId, value.getBlogId())).isEmpty()) {
+				value.setIsLike(true);
+			} else
+				value.setIsLike(false);
+			if (!(starService.findById(userId, value.getBlogId())).isEmpty()) {
+				value.setIsStar(true);
+			} else
+				value.setIsStar(false);
 		}
 		model.addAttribute("blogs", blogs);
 		return "index";

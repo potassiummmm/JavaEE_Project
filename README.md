@@ -1,16 +1,16 @@
 # JavaEE Project Report
 
-Final project of JavaEE course,Fall 2020,Tongji University
+Final project of JavaEE course, Fall 2020, Tongji University
 
 ## Project Preview
 
 #### Team Members:
 
 | Full Name | Matriculation Number | Contact Number | email address |
-| ------ | ------ | ------ | ------ |
+| ------ | :------: | :------: | :------: |
 | Chenwei Ruan | 1850061 |||
-| Zhichen Ren | 1850091 |13917219912|1337795211@qq.com|
-| Zhengyi Zhuo | 1850384 |||
+| Zhichen Ren | 1850091 | 13917219912 | 1337795211@qq.com |
+| Zhengyi Zhuo | 1850384 | 19946254157 | zhuozhengyi@icloud.com |
 | Hansong Zhou | 1852612 | 18897958786 | 1574996073@qq.com |
 
 ## System Functionalities
@@ -253,11 +253,8 @@ Final project of JavaEE course,Fall 2020,Tongji University
   - Index Controller
     - Return index page
 
-  
-
 ## Database Design
 
 
-
 ## Other Technical Details and/or Information
-
+- Blog formatting supports markdown syntax.

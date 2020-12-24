@@ -2,6 +2,7 @@ package com.tongji.springbootdemo.controller;
 
 import com.tongji.springbootdemo.model.Blog;
 import com.tongji.springbootdemo.model.Like;
+import com.tongji.springbootdemo.model.User;
 import com.tongji.springbootdemo.service.BlogService;
 import com.tongji.springbootdemo.service.LikeService;
 import com.tongji.springbootdemo.service.StarService;
@@ -44,21 +45,19 @@ public class LikeController {
 			likeService.addLike(userId, nickname, blogId);
 		}
 		List<Blog> blogs = blogService.findByMostRecent();
-		for (int i=0;i<blogs.size();i++){
-			if((likeService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
-			{
-				blogs.get(i).setIsLike(true);
-			}
-			else
-				blogs.get(i).setIsLike(false);
-			if((starService.findById(userId,blogs.get(i).getBlogId())).isEmpty()==false)
-			{
-				blogs.get(i).setIsStar(true);
-			}
-			else
-				blogs.get(i).setIsStar(false);
+		for (Blog value : blogs) {
+			if (!(likeService.findById(userId, value.getBlogId())).isEmpty()) {
+				value.setIsLike(true);
+			} else
+				value.setIsLike(false);
+			if (!(starService.findById(userId, value.getBlogId())).isEmpty()) {
+				value.setIsStar(true);
+			} else
+				value.setIsStar(false);
 		}
 		model.addAttribute("blogs", blogs);
+		User usr = userService.findById(userId);
+		model.addAttribute("me", usr);
 		return "index";
 	}
 	
@@ -67,6 +66,8 @@ public class LikeController {
 		Integer userId = (Integer) session.getAttribute("userId");
 		List<Like> likes = likeService.findByBlogId(blogId);
 		model.addAttribute("likes", likes);
+		User usr = userService.findById(userId);
+		model.addAttribute("me", usr);
 		return "likeList";
 	}
 }
