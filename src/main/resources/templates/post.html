@@ -27,7 +27,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" th:href="@{/index}">TJ Blog</a>
+      <a class="navbar-brand" th:href="@{/}">TJ Blog</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -48,7 +48,7 @@
           </li>
           <li>
             <a class="nav-link" th:href="@{'/about/' + ${session.userId} + '/addAvatar'}">
-              <img th:src="'data:image/png;base64,' + ${me.getUserImage()}" class="nav img-thumbnail" style="height: 32px; width: 32px">
+              <img th:src="'data:image/png;base64,' + ${me.getUserImage()}" style="width: 40px; height: 40px; border-radius:50%; border: 3px solid #0b2e13;">
             </a>
           </li>
         </ul>
@@ -64,7 +64,8 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <div th:text="${blog.getTitle()}" style="font-size: 72px">Title</div>
-            <a th:text="${blog.getAuthorNickname()}" style="font-size: 48px; color: white" th:href="@{'/about/' + ${blog.getAuthorId()}}">Author Name</a>
+            <a th:href="@{'about/' + ${blog.getAuthorId()}}" style="float: left"> <img th:src="'data:image/png;base64,' + ${avatar}" style="width: 64px; height: 64px; border-radius: 50%; border: 5px solid #0b2e13"></a>
+            <a th:text="${blog.getAuthorNickname()}" style="font-size: 48px; color: white; position: relative; left: 2%" th:href="@{'/about/' + ${blog.getAuthorId()}}" >Author Name</a>
             <div th:text="${blog.getFormattedTime()}" style="font-size: 48px">Time</div>
           </div>
         </div>

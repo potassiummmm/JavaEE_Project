@@ -65,6 +65,7 @@ public class PostController {
         model.addAttribute("comments", comments);
         User usr = userService.findById((Integer) session.getAttribute("userId"));
         model.addAttribute("me", usr);
+        model.addAttribute("avatar", blogService.getBlogAuthorAvatar(blog.getBlogId()));
         return "post";
     }
 

@@ -17,7 +17,11 @@ public interface BlogService {
     Blog findById(Integer blogId);
 
     String getAuthorName(Integer blogId);
-    
+
+    String getBlogAuthorAvatar(Integer blogId);
+
+    List<String> getBlogAvatars(List<Blog> blogs);
+
     void updateLike(Integer like,Integer blogId);
     
     int addBlog(Integer privateIndex, Integer authorId, String title, String content, Integer like, Integer view,Integer star, Timestamp date);

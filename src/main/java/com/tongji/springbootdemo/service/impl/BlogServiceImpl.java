@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +50,21 @@ public class BlogServiceImpl implements BlogService {
     public String getAuthorName(Integer blogId) {
         Integer authorId = blogMapper.findById(blogId).get(0).getAuthorId();
         return userMapper.findById(authorId).get(0).getNickname();
+    }
+
+    @Override
+    public String getBlogAuthorAvatar(Integer blogId) {
+        Integer authorId = blogMapper.findById(blogId).get(0).getAuthorId();
+        return userMapper.findById(authorId).get(0).getUserImage();
+    }
+
+    @Override
+    public List<String> getBlogAvatars(List<Blog> blogs) {
+        List<String> avatars = new ArrayList<>();
+        for (Blog blog : blogs) {
+            avatars.add(getBlogAuthorAvatar(blog.getBlogId()));
+        }
+        return avatars;
     }
 
     @Override
