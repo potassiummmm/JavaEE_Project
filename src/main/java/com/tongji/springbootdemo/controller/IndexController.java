@@ -115,7 +115,7 @@ public class IndexController {
     @RequestMapping(value="/about/{userId}/addAvatar/submit", headers=("content-type=multipart/*"))
     public String upload(@PathVariable("userId") Integer userId, @RequestParam("file") MultipartFile file) throws IOException {
         if (file.isEmpty()) {
-            return "failed";
+            return "redirect:/";
         }
         userService.updateImage(userId, file);
         return "redirect:/";

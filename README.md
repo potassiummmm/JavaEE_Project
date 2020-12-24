@@ -183,7 +183,7 @@ Final project of JavaEE course, Fall 2020, Tongji University
               }
           }
           else {
-              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH mm");
+              SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
               sb.append(dateFormat.format(date));
           }
           return sb.toString();
@@ -252,6 +252,10 @@ Final project of JavaEE course, Fall 2020, Tongji University
 
   - Index Controller
     - Return index page
+    - Return index page that blogs are sorted in the given order
+    - Return about page of a user
+    - return Post Avatar page and offer upload function
+    - Log out function
 
 
 ## Database Design
@@ -307,9 +311,11 @@ Final project of JavaEE course, Fall 2020, Tongji University
 | registrationTime | timestamp |  |  | timezone:shanghai |
 | userImage | mediumtext |  | 0 | base64 |
 -->
+
 ### stars
 
 <!--
+
 | Field Name | Data Type | Length |Example| Note |
 | ------ | :------: | :------: | :------: | :------: |
 | userId | char | 30 | 1 |primary key,auto_increment|
