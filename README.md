@@ -46,13 +46,22 @@ Final project of JavaEE course,Fall 2020,Tongji University
 
 ## System Architecture and Component Design
 
-- Dao layer to connect database
-- Service layer to offer business logic
-- Controller layer to deal with URL request , add models and return the View layer, which is responsible for interacting with users
-- 
+### System Architecture
+
+- Design DAO Layer to connect database
+- Design Service Layer to provide interfaces for manipulate database
+- Design View Layer to show information to users
+- Design Controller Layer to deal with URL requests
+  - Use interface in Service Layer to manipulate database
+  - Add object to View Layer
+
+### Component Design
+
+
 
 ## Database Design
 
-###
+
 
 ## Other Technical Details and/or Information
+
