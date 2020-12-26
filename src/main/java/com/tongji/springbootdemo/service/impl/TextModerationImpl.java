@@ -22,7 +22,7 @@ public class TextModerationImpl implements TextModerationService {
     public HashMap<String, String> toMap(String content) {
         HashMap<String, String> map = new HashMap<String, String>();
         try {
-            Credential cred = new Credential("AKIDrS3WjgWr4vcheMtxrVrwzuZy7zc12ED6", "5uTmoZq0tUo3C4iRD9tNbZGf4LL3Tj01");
+            Credential cred = new Credential("SECRETID", "SECRETKEY");
 
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("tms.tencentcloudapi.com");
